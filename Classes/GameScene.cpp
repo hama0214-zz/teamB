@@ -1,5 +1,7 @@
 #include "Gamescene.h"
 
+#include "PlayerSprite.h"
+
 using namespace cocos2d;
 using namespace std;
 
@@ -20,6 +22,10 @@ bool GameScene::init()
         return false;
     }
     
+    //ここから
+    PlayerSprite* player = new PlayerSprite(100,199);
+    this->addChild(player);
+
     return true;
     
 }
