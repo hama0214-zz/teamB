@@ -20,7 +20,7 @@ class MapPieceManager : CCObject{
 public:
     // TODO: マップデータからマネージャーを作る
     /** クリエイトメソッド */
-    MapPieceManager* create();
+    static MapPieceManager* create();
 
     /**
      * 指定したノードにマップパーツを配置する。

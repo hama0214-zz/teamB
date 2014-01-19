@@ -26,6 +26,10 @@ bool GameScene::init()
     PlayerSprite* player = new PlayerSprite(100,199);
     this->addChild(player);
 
+    // マップ管理者
+    mapPieceMgr = MapPieceManager::create();
+    mapPieceMgr->makeMapForNode(this);
+
     return true;
     
 }

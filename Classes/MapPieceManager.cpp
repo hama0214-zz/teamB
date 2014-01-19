@@ -28,9 +28,15 @@ bool MapPieceManager::init() {
 void MapPieceManager::makeMapForNode(CCNode* node) {
     CCAssert(node != NULL, "指定されたノードが存在しない。");
 
+    // TODO: ダミーのマップピース。実際にはマップデータをファクトリーに情報を渡してオブジェクトを作る。
     CCSprite* piece1 = CCSprite::create("CloseNormal.png");
+    piece1->setPosition(ccp(100, 100));
+
     CCSprite* piece2 = CCSprite::create("CloseNormal.png");
+    piece2->setPosition(ccp(200, 100));
+
     CCSprite* piece3 = CCSprite::create("CloseNormal.png");
+    piece3->setPosition(ccp(300, 100));
 
     node->addChild(piece1);
     node->addChild(piece2);
