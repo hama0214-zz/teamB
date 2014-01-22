@@ -11,14 +11,13 @@
 
 #include "cocos2d.h"
 #include "Variables.h"
-#include "MapPiece.h"
 #include "FieldPiece.h"
 
 USING_NS_CC;
 
 class MapPieceFactory {
 public:
-    static MapPiece* create(Variables::PIECE_TYPE type, const char* pszFileName);
+    static MapPiece* create(Variables::PIECE_TYPE type, Variables::PIECE_IMAGE image);
 };
 
 #endif /* defined(__teamB__MapPieceFactory__) */

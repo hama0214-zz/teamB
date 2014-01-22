@@ -15,8 +15,9 @@
 USING_NS_CC;
 
 class FieldPiece : public MapPiece {
+    const char* getPszFileName(Variables::PIECE_IMAGE image);
 public:
-    static FieldPiece* create(const char* pszFileName);
+    static FieldPiece* create(Variables::PIECE_IMAGE image);
 };
 
 #endif /* defined(__teamB__FieldPiece__) */
