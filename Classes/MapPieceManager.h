@@ -10,6 +10,8 @@
 #define __teamB__MapPieceManager__
 
 #include "cocos2d.h"
+#include "Variables.h"
+#include "MapPieceFactory.h"
 
 USING_NS_CC;
 

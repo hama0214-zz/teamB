@@ -38,7 +38,11 @@ void MapPieceManager::makeMapForNode(CCNode* node) {
     CCSprite* piece3 = CCSprite::create("CloseNormal.png");
     piece3->setPosition(ccp(300, 100));
 
+    MapPiece* piece4 = MapPieceFactory::create(Variables::FIELD_PIECE, "Icon-72.png");
+    piece4->setPosition(ccp(400, 100));
+
     node->addChild(piece1);
     node->addChild(piece2);
     node->addChild(piece3);
+    node->addChild(piece4);
 }

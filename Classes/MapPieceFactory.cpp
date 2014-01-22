@@ -8,9 +8,10 @@
 
 #include "MapPieceFactory.h"
 
-MapPiece* create(Variables::PIECE_TYPE type, const char* pszFileName) {
+MapPiece* MapPieceFactory::create(Variables::PIECE_TYPE type, const char* pszFileName) {
+    MapPiece* piece;
     if (type == Variables::FIELD_PIECE) {
-        FieldPiece* piece = FieldPiece::create(pszFileName);
-        return piece;
+        piece = FieldPiece::create(pszFileName);
     }
+    return piece;
 }
