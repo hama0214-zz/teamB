@@ -32,10 +32,6 @@ public:
         ITEM_PIECE_IMAGE_2 = 102
     };
     
-    // アイテムの画像
-    enum ITEM_PIECE_IMAGE {
-    };
-    
 };
 
 #endif
