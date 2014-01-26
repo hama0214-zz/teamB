@@ -1,12 +1,12 @@
 //
-//  FieldPiece.cpp
+//  ItemPiece.cpp
 //  teamB
 //
-//  Created by cocos2d-x on 2014/01/19.
+//  Created by cocos2d-x on 2014/01/26.
 //
 //
 
-#include "FieldPiece.h"
+#include "ItemPiece.h"
 
 /**
  * FieldPieceを生成するクラスメソッド
@@ -14,8 +14,8 @@
  * @param {Variables::PIECE_IMAGE} image
  * @return {FieldPiece*}
  */
-FieldPiece* FieldPiece::create(Variables::PIECE_IMAGE image) {
-    FieldPiece *pobSprite = new FieldPiece();
+ItemPiece* ItemPiece::create(Variables::PIECE_IMAGE image) {
+    ItemPiece *pobSprite = new ItemPiece();
     if (pobSprite && pobSprite->initWithFile(pobSprite->getPszFileName(image))) {
         pobSprite->pieceImage = image;
         pobSprite->autorelease();
@@ -31,16 +31,10 @@ FieldPiece* FieldPiece::create(Variables::PIECE_IMAGE image) {
  * @param {Variables::PIECE_IMAGE} image
  * @return {const char*}
  */
-const char* FieldPiece::getPszFileName(Variables::PIECE_IMAGE image) {
+const char* ItemPiece::getPszFileName(Variables::PIECE_IMAGE image) {
     const char* pszFileName;
     switch (image) {
-        case Variables::FIELD_PIECE_IMAGE_0:
-            pszFileName = "field_piece_00.png";
-            break;
-        case Variables::FIELD_PIECE_IMAGE_1:
-            pszFileName = "Icon-72.png";
-            break;
-        case Variables::FIELD_PIECE_IMAGE_2:
+        case Variables::ITEM_PIECE_IMAGE_0:
             pszFileName = "Icon-72.png";
             break;
         default:
@@ -52,6 +46,20 @@ const char* FieldPiece::getPszFileName(Variables::PIECE_IMAGE image) {
 /**
  * コンストラクタ
  */
-FieldPiece::FieldPiece() {
-    pieceType = Variables::FIELD_PIECE;
+ItemPiece::ItemPiece() {
+    isUsed = false;
+    pieceType = Variables::ITEM_PIECE;
+}
+
+/**
+ * アイテムを使用する際に呼ばれるメソッド
+ */
+void ItemPiece::use() {
+    isUsed = true;
+    
+    // 見た目上画面から消す
+    CCActionInterval* action1 = CCScaleTo::create(10, 0);
+    runAction(action1);
+    
+    // Todo: 効果を発動する
 }

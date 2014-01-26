@@ -12,6 +12,8 @@
 #include "cocos2d.h"
 #include "Variables.h"
 #include "FieldPiece.h"
+#include "EnemyPiece.h"
+#include "ItemPiece.h"
 
 USING_NS_CC;
 
