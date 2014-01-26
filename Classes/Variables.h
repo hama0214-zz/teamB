@@ -2,7 +2,7 @@
 //  Variables.h
 //  teamB
 //
-//  Created by cocos2d-x on 2014/01/19.
+//  Created by Yuto Yoshinari on 2014/01/19.
 //
 //
 
