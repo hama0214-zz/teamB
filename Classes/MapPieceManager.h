@@ -37,6 +37,9 @@ private:
      * @return 初期化に成功したかどうか。
      */
     bool init();
+
+    CCArray* m_column;
+    CCArray* m_line;
 };
 
 #endif /* defined(__teamB__MapPieceManager__) */
