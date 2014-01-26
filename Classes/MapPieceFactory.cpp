@@ -25,10 +25,15 @@ MapPiece* MapPieceFactory::create(Variables::PIECE_TYPE type, Variables::PIECE_I
         case Variables::FIELD_PIECE:
             piece = FieldPiece::create(image);
             break;
+        
+        // 敵
+        case Variables::ENEMY_PIECE:
+            piece = EnemyPiece::create(image);
+            break;
             
         // アイテム
         case Variables::ITEM_PIECE:
-            // piece = ItemPiece::create(image);
+            piece = ItemPiece::create(image);
             break;
             
         default:
