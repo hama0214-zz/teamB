@@ -85,7 +85,7 @@ bool PlayerSprite::isTouchPoint(CCPoint point)
 bool PlayerSprite::jump()
 {
 
-    if(pStatus==0)
+    if(pStatus==2)
     {
 
         CCCallFuncN *actionMoveDone =
@@ -119,16 +119,41 @@ void PlayerSprite::update(float dt)
     //位置を取得
     CCPoint point = this->getPosition();
 //    CCLog("x座標：%f, y座標：%f", point.x, point.y);
-    
-    if(pStatus==1)
-    {
-        //床の高さをみて待機させる
-        if (point.y < 100 + (this->getContentSize().height * this->getScaleY()) / 2)
-        {
-            landing();
-            this->setPosition(ccp(point.x , 101 + (this->getContentSize().height * this->getScaleY()) / 2));
-        }
+
+    switch (pStatus) {
+        case 2://着地中
+            
+            //地面がなくなる判定をかく
+            
+            break;
+            
+        case 1://空中
+            //床の高さをみて待機させる
+            if (point.y < 100 + (this->getContentSize().height * this->getScaleY()) / 2)
+            {
+                landing();
+                this->setPosition(ccp(point.x , 101 + (this->getContentSize().height * this->getScaleY()) / 2));
+            }
+            break;
         
+        case 0://落下開始
+            CCLog("らっかなう");
+            pStatus=1;
+            
+            CCCallFuncN *actionMoveDone =
+            CCCallFuncN::create(this,
+                                callfuncN_selector(PlayerSprite::playerMoveFinished));
+            
+            //        CCMoveBy *jumpAct = CCMoveBy::create(0.5f,ccp(0,130));
+            CCJumpTo *jumpAct = CCJumpTo::create(1.0f,ccp(100,0),0,1 );
+            
+            CCActionInterval *easingAct = CCEaseOut::create(jumpAct,2.0f);
+            this->runAction(CCSequence::create(
+                                               easingAct,actionMoveDone,NULL));
+            
+            
+            break;
+    
     }
 }
 
@@ -154,15 +179,14 @@ int PlayerSprite::getpStatus()
 void PlayerSprite::landing()
 {
     this->stopAllActions();
-    pStatus=0;
+    pStatus=2;
 }
 
 
-//jump終了メソッド
+//jump終了メソッド。
 void PlayerSprite::playerMoveFinished()
 {
-    pStatus=0;
-    CCLog("jumpDone");
+    pStatus=2;
 }
 
 
