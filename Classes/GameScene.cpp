@@ -68,7 +68,9 @@ void GameScene::ccTouchesBegan(cocos2d::CCSet *touches,
 
 void GameScene::moveStart() {
     CCMoveBy* move = CCMoveBy::create(GameScene::MAP_MOVE_SPEED, ccp(-MapPieceManager::CELL_WIDTH, 0));
-    CCRepeatForever* moveRep = CCRepeatForever::create(move);
+    CCCallFuncO* removeLastLineFunc = CCCallFuncO::create((CCObject*)mapPieceMgr, callfuncO_selector(MapPieceManager::removeLastLineMapPieces), mapNode);
+    CCSequence* moveSeq = CCSequence::create(move, removeLastLineFunc, NULL);
+    CCRepeatForever* moveRep = CCRepeatForever::create(moveSeq);
     moveRep->setTag(GameScene::TAG_MAP_MOVE_EVENT);
     mapNode->runAction(moveRep);
 }

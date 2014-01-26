@@ -12,6 +12,7 @@
 
 const int MapPieceManager::CELL_WIDTH = 80;
 const int MapPieceManager::CELL_HEIGHT = 80;
+const int MapPieceManager::MAP_HEIGHT = 8;
 
 MapPieceManager::~MapPieceManager() {}
 
@@ -30,15 +31,16 @@ bool MapPieceManager::init() {
     return true;
 }
 
-void MapPieceManager::makeMapForNode(CCNode* node) {
-    CCAssert(node != NULL, "指定されたノードが存在しない。");
+void MapPieceManager::makeMapForNode(CCNode* mapNode) {
+    CCAssert(mapNode != NULL, "指定されたノードが存在しない。");
 
     // マップピース管理配列
     m_mapPieceMatrix = CCArray::create();
     CCAssert(m_mapPieceMatrix != NULL, "配列の生成に失敗した。");
+    CC_SAFE_RETAIN(m_mapPieceMatrix);
 
     // ダミーのマップデータ。ゆくゆくは外部ツールで作りたいが、時間次第ではここで手打ちになるかもしれない。
-    int dammyMapData[8][30] = {
+    int dammyMapData[MAP_HEIGHT][30] = {
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -51,8 +53,9 @@ void MapPieceManager::makeMapForNode(CCNode* node) {
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     };
 
-    // マップデータの長さ取得
+    // マップデータの横の長さ取得
     const int columnNum = sizeof dammyMapData[0] /sizeof dammyMapData[0][0];
+    // マップデータの縦の長さ取得
     const int lineNum = sizeof dammyMapData /sizeof dammyMapData[0];
 
     for (int i = 0; i < columnNum; i++) {
@@ -70,8 +73,8 @@ void MapPieceManager::makeMapForNode(CCNode* node) {
             CCAssert(mapObject != NULL, "マップピースオブジェクトの生成に失敗した。");
 
             // 座標の設定
-            mapObject->setPosition(ccp(i * CELL_WIDTH, j * CELL_HEIGHT));
-            node->addChild(mapObject);
+            mapObject->setPosition(ccp(i * CELL_WIDTH, (lineNum - 1 - j) * CELL_HEIGHT));
+            mapNode->addChild(mapObject);
 
             // マップピースオブジェクトを追加
             linePieces->addObject(mapObject);
@@ -108,14 +111,34 @@ CCArray* MapPieceManager::getAllMapPieces() {
 
 MapPiece* MapPieceManager::getMapPieceAtMapPos(int x, int y) {
     // 指定列のデータ取得
-    CCObject* arrayObj = m_mapPieceMatrix->objectAtIndex(m_mapPieceMatrix->count() - 1 - y);
+    CCObject* arrayObj = m_mapPieceMatrix->objectAtIndex(x);
     CCArray* mapPiecesOfColumn = dynamic_cast<CCArray*>(arrayObj);
     CCAssert(mapPiecesOfColumn != NULL, "マップピースオブジェクト管理配列内のデータがオブジェクト配列でない。");
 
     // 指定の行のデータ取得
-    CCObject* mapPieceObj = mapPiecesOfColumn->objectAtIndex(x);
+    CCObject* mapPieceObj = mapPiecesOfColumn->objectAtIndex(m_mapPieceMatrix->count() - 1 - y);
     MapPiece* mapPiece = dynamic_cast<MapPiece*>(mapPieceObj);
     CCAssert(mapPiece != NULL, "オブジェクト配列内のデータがマップピースでない。");
 
     return mapPiece;
+}
+
+void MapPieceManager::removeLastLineMapPieces(CCObject* mapNodeObj) {
+    CCAssert(mapNodeObj != NULL, "指定されたオブジェクトが存在しない。");
+
+    CCNode* mapNode = dynamic_cast<CCNode*>(mapNodeObj);
+    CCAssert(mapNode != NULL, "指定されたオブジェクトがノードでない。");
+
+    CCArray* mapLine = dynamic_cast<CCArray*>(m_mapPieceMatrix->objectAtIndex(0));
+    CCAssert(mapLine != NULL, "マップピースオブジェクト管理配列内のデータがオブジェクト配列でない。");
+
+    for (int i = MapPieceManager::MAP_HEIGHT - 1; i >= 0; i--) {
+        MapPiece* mapPiece = dynamic_cast<MapPiece*>(mapLine->objectAtIndex(i));
+        CCAssert(mapPiece != NULL, "オブジェクト配列内のデータがマップピースでない。");
+
+        mapNode->removeChild(mapPiece);
+        mapLine->removeObject(mapPiece);
+    }
+
+    m_mapPieceMatrix->removeObject(mapLine);
 }

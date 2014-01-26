@@ -28,6 +28,8 @@ public:
     /** 1マスの縦幅 */
     static const int CELL_HEIGHT;
 
+    /** マップの縦のマス数 */
+    static const int MAP_HEIGHT;
 
     // TODO: マップデータからマネージャーを作る
     /** クリエイトメソッド */
@@ -35,9 +37,9 @@ public:
 
     /**
      * 指定したノードにマップパーツを配置する。
-     * @param node ノード
+     * @param マップピースの配置するノード。
      */
-    void makeMapForNode(CCNode* node);
+    void makeMapForNode(CCNode* mapNode);
 
     /**
      * 全てのマップピースオブジェクトを取得する。
@@ -52,6 +54,12 @@ public:
      * @return マップピース。
      */
     MapPiece* getMapPieceAtMapPos(int x, int y);
+
+    /**
+     * 現在一番左側の列のマップピースオブジェクトを全て削除する。
+     * @param マップピースの配置されているノード。
+     */
+    void removeLastLineMapPieces(CCObject* mapNodeObj);
 
 private:
     /** 全てのマップピースオブジェクトを管理する配列 */
