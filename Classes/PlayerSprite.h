@@ -29,6 +29,8 @@ private:
     /** デストラクタ */
     ~PlayerSprite();
     
+    void landing();
+    
     /**
      * 初期化する
      * @return 初期化に成功したかどうか。
