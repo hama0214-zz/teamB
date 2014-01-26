@@ -14,6 +14,9 @@ public:
 private:
     /** マップ管理オブジェクト */
     MapPieceManager* mapPieceMgr;
+
+    /** マップピースのオブジェクトを設置するノード */
+    CCNode* mapNode;
 };
 
 #endif //__GAME_SCENE_H__

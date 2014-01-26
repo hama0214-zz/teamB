@@ -23,12 +23,18 @@ bool GameScene::init()
     }
     
     //ここから
-    PlayerSprite* player = new PlayerSprite(100,199);
-    this->addChild(player);
+    // マップノード
+    mapNode = CCNode::create();
+    // マップピース設置位置の基点
+    mapNode->setPosition(ccp(MapPieceManager::CELL_WIDTH / 2, MapPieceManager::CELL_HEIGHT / 2));
+    addChild(mapNode);
 
     // マップ管理者
     mapPieceMgr = MapPieceManager::create();
-    mapPieceMgr->makeMapForNode(this);
+    mapPieceMgr->makeMapForNode(mapNode);
+
+    PlayerSprite* player = new PlayerSprite(100,199);
+    this->addChild(player);
 
     return true;
     
