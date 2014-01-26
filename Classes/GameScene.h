@@ -32,6 +32,13 @@ private:
 
     /** マップの移動停止 */
     void moveStop();
+    
+    /** スコア類の更新 */
+    void upScore();
+    CCLabelTTF* scoreLabel;
+    CCLabelTTF* materLabel;
+    CCLabelTTF* materDLabel;
+    int iMater;
 };
 
 #endif //__GAME_SCENE_H__

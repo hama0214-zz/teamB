@@ -16,14 +16,18 @@ public:
     
     int pStatus;
     int pAction;
+    int pGigantic;
+    int pAbsorption;
+    int pFlight;
     
     bool jump();
     void playerMoveFinished();
     void update(float);
 
     int getpStatus();
-    int getpAction();
-    
+    bool getpGigantic();
+    bool getpAbsorption();
+    bool getpFlight();
 
 private:
     /** デストラクタ */
