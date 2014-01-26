@@ -39,6 +39,13 @@ void PlayerSprite::myInit(int x,int y)
     this->setPosition(ccp(x,y));
     this->setTag(1);
     
+    //サイズを設定
+    this->setScale(0.5);
+    
+    //サイズを取得してログ表示
+    CCSize imgSize = this->getContentSize();
+//    CCLog("pImgの幅は%f pImgの高さは%f", imgSize.width, imgSize.height);
+    
     this->schedule(schedule_selector(PlayerSprite::update));
 }
 
@@ -85,7 +92,9 @@ bool PlayerSprite::jump()
                             CCCallFuncN::create(this,
                                                callfuncN_selector(PlayerSprite::playerMoveFinished));
         
-        CCMoveBy *jumpAct = CCMoveBy::create(0.5f,ccp(0,130));
+//        CCMoveBy *jumpAct = CCMoveBy::create(0.5f,ccp(0,130));
+        CCJumpTo *jumpAct = CCJumpTo::create(1.0f,ccp(100,0),300,1 );
+
         CCActionInterval *easingAct = CCEaseOut::create(jumpAct,2.0f);
         this->runAction(CCSequence::create(
                                            easingAct,actionMoveDone,NULL));
@@ -94,8 +103,7 @@ bool PlayerSprite::jump()
         CCLog("じゃんぷ！（Player側のイベント受け取り成功）");
         
     }else if(pStatus==1){
-        this->stopAllActions();
-        pStatus=0;
+        landing();
         CCLog("緊急脱出");
         
     }
@@ -108,9 +116,19 @@ bool PlayerSprite::jump()
 
 void PlayerSprite::update(float dt)
 {
+    //位置を取得
+    CCPoint point = this->getPosition();
+//    CCLog("x座標：%f, y座標：%f", point.x, point.y);
+    
     if(pStatus==1)
     {
-    CCLog("jamp中みたいです %i",pStatus);
+        //床の高さをみて待機させる
+        if (point.y < 100 + (this->getContentSize().height * this->getScaleY()) / 2)
+        {
+            landing();
+            this->setPosition(ccp(point.x , 101 + (this->getContentSize().height * this->getScaleY()) / 2));
+        }
+        
     }
 }
 
@@ -132,7 +150,15 @@ int PlayerSprite::getpStatus()
     return pStatus;
 }
 
-//jamp終了メソッド
+//jump
+void PlayerSprite::landing()
+{
+    this->stopAllActions();
+    pStatus=0;
+}
+
+
+//jump終了メソッド
 void PlayerSprite::playerMoveFinished()
 {
     pStatus=0;

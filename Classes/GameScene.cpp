@@ -27,7 +27,7 @@ bool GameScene::init()
     
     //キャラクター配置
     player = PlayerSprite::create("player_nomal.png");
-    player->myInit(100,200);
+    player->myInit(100,250);
     this->addChild(player);
     
     
