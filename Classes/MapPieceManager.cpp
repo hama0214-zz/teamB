@@ -37,31 +37,32 @@ void MapPieceManager::makeMapForNode(CCNode* node) {
     m_mapPieceMatrix = CCArray::create();
     CCAssert(m_mapPieceMatrix != NULL, "配列の生成に失敗した。");
 
-    // ダミーのマップデータ
-    int dammyMapData[][9] = {
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0, 0, 0, 0},
+    // ダミーのマップデータ。ゆくゆくは外部ツールで作りたいが、時間次第ではここで手打ちになるかもしれない。
+    int dammyMapData[8][30] = {
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     };
 
     // マップデータの長さ取得
-    const int lineNum = sizeof dammyMapData /sizeof dammyMapData[0];
     const int columnNum = sizeof dammyMapData[0] /sizeof dammyMapData[0][0];
+    const int lineNum = sizeof dammyMapData /sizeof dammyMapData[0];
 
-    for (int i = 0; i < lineNum; i++) {
+    for (int i = 0; i < columnNum; i++) {
         // 1列あたりのオブジェクト群を格納する
         CCArray* linePieces = CCArray::create();
         CCAssert(m_mapPieceMatrix != NULL, "配列の生成に失敗した。");
 
-        for (int j = 0; j < columnNum; j++) {
+        for (int j = lineNum - 1; j >= 0; j--) {
             // マップデータからピース生成に必要な情報を生成
-            int mapData = dammyMapData[i][j];
+            int mapData = dammyMapData[j][i];
             PieceData pieceData = PieceData(mapData);
 
             // マップピースオブジェクトの生成
@@ -107,12 +108,12 @@ CCArray* MapPieceManager::getAllMapPieces() {
 
 MapPiece* MapPieceManager::getMapPieceAtMapPos(int x, int y) {
     // 指定列のデータ取得
-    CCObject* arrayObj = m_mapPieceMatrix->objectAtIndex(x);
+    CCObject* arrayObj = m_mapPieceMatrix->objectAtIndex(m_mapPieceMatrix->count() - 1 - y);
     CCArray* mapPiecesOfColumn = dynamic_cast<CCArray*>(arrayObj);
     CCAssert(mapPiecesOfColumn != NULL, "マップピースオブジェクト管理配列内のデータがオブジェクト配列でない。");
 
     // 指定の行のデータ取得
-    CCObject* mapPieceObj = mapPiecesOfColumn->objectAtIndex(y);
+    CCObject* mapPieceObj = mapPiecesOfColumn->objectAtIndex(x);
     MapPiece* mapPiece = dynamic_cast<MapPiece*>(mapPieceObj);
     CCAssert(mapPiece != NULL, "オブジェクト配列内のデータがマップピースでない。");
 
