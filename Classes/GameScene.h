@@ -15,11 +15,23 @@ public:
 
 
 private:
+    /** 1マス分の距離を何秒で移動するかの定数。 */
+    static const float MAP_MOVE_SPEED;
+
+    /** マップの移動アクションのタグ（移動をストップさせるのに使用） */
+    static const int TAG_MAP_MOVE_EVENT;
+
     /** マップ管理オブジェクト */
     MapPieceManager* mapPieceMgr;
 
     /** マップピースのオブジェクトを設置するノード */
     CCNode* mapNode;
+
+    /** マップ移動開始 */
+    void moveStart();
+
+    /** マップの移動停止 */
+    void moveStop();
 };
 
 #endif //__GAME_SCENE_H__
