@@ -5,6 +5,9 @@
 using namespace cocos2d;
 using namespace std;
 
+//キャラクターの作成
+PlayerSprite *player;
+
 CCScene* GameScene::scene()
 {
     CCScene* scene = CCScene::create();
@@ -22,9 +25,15 @@ bool GameScene::init()
         return false;
     }
     
-    //ここから
-    PlayerSprite* player = new PlayerSprite(100,199);
+    //キャラクター配置
+    player = PlayerSprite::create("player_nomal.png");
+    player->myInit(100,200);
     this->addChild(player);
+    
+    
+    //タップイベントを取得する
+    this->setTouchMode(kCCTouchesAllAtOnce);
+    this->setTouchEnabled(true);
 
     // マップ管理者
     mapPieceMgr = MapPieceManager::create();
@@ -32,4 +41,11 @@ bool GameScene::init()
 
     return true;
     
+}
+
+void GameScene::ccTouchesBegan(cocos2d::CCSet *touches,
+                               cocos2d::CCEvent *event)
+{
+    player->jump();
+    CCLog("pAction %d ",player->getpStatus());
 }
