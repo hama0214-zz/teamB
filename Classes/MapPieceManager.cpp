@@ -63,6 +63,9 @@ void MapPieceManager::makeMapForNode(CCNode* mapNode) {
         CCArray* linePieces = CCArray::create();
         CCAssert(m_mapPieceMatrix != NULL, "配列の生成に失敗した。");
 
+        // 1列あたりのマップデータ群を格納する
+        std::vector<int> linedatas;
+
         for (int j = lineNum - 1; j >= 0; j--) {
             // マップデータからピース生成に必要な情報を生成
             int mapData = dammyMapData[j][i];
@@ -78,10 +81,16 @@ void MapPieceManager::makeMapForNode(CCNode* mapNode) {
 
             // マップピースオブジェクトを追加
             linePieces->addObject(mapObject);
+
+            // マップデータを追加
+            linedatas.push_back(mapData);
         }
 
         // 1列あたりのオブジェクト群をマップピース管理配列に追加
         m_mapPieceMatrix->addObject(linePieces);
+
+        // 1列あたりのマップデータ群をマップデータ管理配列に追加
+        m_mapDatas.push_back(linedatas);
     }
 
 }

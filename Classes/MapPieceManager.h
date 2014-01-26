@@ -54,6 +54,9 @@ public:
     void removeLastLineMapPieces(CCObject* mapNodeObj);
 
 private:
+    /** マップデータ。 */
+    std::vector< std::vector<int> > m_mapDatas;
+
     /** 全てのマップピースオブジェクトを管理する配列 */
     CCArray* m_mapPieceMatrix;
 
