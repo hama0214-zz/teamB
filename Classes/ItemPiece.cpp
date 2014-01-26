@@ -58,7 +58,7 @@ void ItemPiece::use() {
     isUsed = true;
     
     // 見た目上画面から消す
-    CCActionInterval* action1 = CCScaleTo::create(10, 0);
+    CCScaleTo* action1 = CCScaleTo::create(1, 0.0f);
     runAction(action1);
     
     // Todo: 効果を発動する

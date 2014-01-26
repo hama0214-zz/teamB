@@ -58,10 +58,10 @@ void EnemyPiece::die() {
     isAlive = false;
     
     // 見た目上画面から消す
-    CCActionInterval* action1 = CCScaleTo::create(1000, 0);
-    CCActionInterval* action2 = CCMoveBy::create(1000, ccp(0,20));
+    CCScaleTo* action1 = CCScaleTo::create(1, 0.0f);
+    CCMoveBy* action2 = CCMoveBy::create(1, ccp(0,40));
     
-    CCSequence* sequence = CCSequence::create(action1, action2, NULL);
+    CCSequence* sequence = CCSequence::createWithTwoActions(action1, action2);
     runAction(sequence);
 }
 
