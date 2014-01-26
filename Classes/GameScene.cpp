@@ -25,20 +25,24 @@ bool GameScene::init()
         return false;
     }
     
+    // マップノード
+    mapNode = CCNode::create();
+    // マップピース設置位置の基点
+    mapNode->setPosition(ccp(MapPieceManager::CELL_WIDTH / 2, MapPieceManager::CELL_HEIGHT / 2));
+    addChild(mapNode);
+
+    // マップマネージャー
+    mapPieceMgr = MapPieceManager::create();
+    mapPieceMgr->makeMapForNode(mapNode);
+
     //キャラクター配置
     player = PlayerSprite::create("player_nomal.png");
     player->myInit(100,200);
     this->addChild(player);
     
-    
     //タップイベントを取得する
     this->setTouchMode(kCCTouchesAllAtOnce);
     this->setTouchEnabled(true);
-
-    // マップ管理者
-    mapPieceMgr = MapPieceManager::create();
-    mapPieceMgr->makeMapForNode(this);
-
     return true;
     
 }
