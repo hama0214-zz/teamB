@@ -11,6 +11,7 @@
 
 #include "cocos2d.h"
 #include "Variables.h"
+#include "PlayerSprite.h"
 
 USING_NS_CC;
 
@@ -22,6 +23,8 @@ class GameManager {
         UP    = 1, // 浮いている
         HIT   = 2  // 何かと衝突している
     };
+    
+    PlayerSprite* player;
     
     // ピースのサイズ
     int PIECE_SIZE = 80;
@@ -37,6 +40,8 @@ class GameManager {
     void updateColumn();
     void updateColumnH();
     void updateIndexY();
+    
+    float getPlayerY();
     
     PLAYER_STATE getPlayerState();
     void onPlayerRide();

@@ -83,9 +83,20 @@ void GameManager::updateColumnH() {
  * @private
  */
 void GameManager::updateIndexY() {
-    float playerY; // TODO: プレイヤーのY座標を取得する
+    float playerY = getPlayerY();
 
     indexY = (int)(playerY/PIECE_SIZE);
+}
+
+/**
+ * プレイヤーのY座標（実際の座標）を取得するメソッド
+ * @private
+ */
+float GameManager::getPlayerY() {
+    float playerY;
+    CCRect rect = player->getRect();
+    playerY = rect.origin.y - rect.size.height/2;
+    return playerY;
 }
 
 /**
@@ -94,7 +105,7 @@ void GameManager::updateIndexY() {
  * @return {PLAYER_STATE}
  */
 GameManager::PLAYER_STATE GameManager::getPlayerState() {
-    float playerY; // TODO: プレイヤーのY座標を取得する
+    float playerY = getPlayerY();
     
     if (columnH * PIECE_SIZE < playerY) {
         return UP;
