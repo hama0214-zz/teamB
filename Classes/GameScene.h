@@ -10,6 +10,9 @@ public:
     virtual bool init();
     static cocos2d::CCScene* scene();
     CREATE_FUNC(GameScene);
+    void ccTouchesBegan(cocos2d::CCSet*,
+                        cocos2d::CCEvent*);
+
 
 private:
     /** マップ管理オブジェクト */

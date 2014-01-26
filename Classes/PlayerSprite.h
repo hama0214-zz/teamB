@@ -7,10 +7,34 @@ class PlayerSprite : public cocos2d::CCSprite
 {
 public:
     
-    PlayerSprite(int,int);
+    PlayerSprite();
+    static PlayerSprite *create(const char *pszFileName);
+    void myInit(int,int);
     
     cocos2d::CCRect getRect();
     bool isTouchPoint(cocos2d::CCPoint);
+    
+    int pStatus;
+    int pAction;
+    
+    bool jump();
+    void playerMoveFinished();
+    void update(float);
+
+    int getpStatus();
+    int getpAction();
+    
+
+private:
+    /** デストラクタ */
+    ~PlayerSprite();
+    
+    /**
+     * 初期化する
+     * @return 初期化に成功したかどうか。
+     */
+    bool init();
+
     
 };
 
