@@ -48,14 +48,6 @@ public:
     CCArray* getAllMapPieces();
 
     /**
-     * マップ上の座標からマップピースを取得する。
-     * @param x マップ上のx位置。
-     * @param y マップ上のy位置。
-     * @return マップピース。
-     */
-    MapPiece* getMapPieceAtMapPos(int x, int y);
-
-    /**
      * 現在一番左側の列のマップピースオブジェクトを全て削除する。
      * @param マップピースの配置されているノード。
      */

@@ -109,20 +109,6 @@ CCArray* MapPieceManager::getAllMapPieces() {
     return mapPieces;
 }
 
-MapPiece* MapPieceManager::getMapPieceAtMapPos(int x, int y) {
-    // 指定列のデータ取得
-    CCObject* arrayObj = m_mapPieceMatrix->objectAtIndex(x);
-    CCArray* mapPiecesOfColumn = dynamic_cast<CCArray*>(arrayObj);
-    CCAssert(mapPiecesOfColumn != NULL, "マップピースオブジェクト管理配列内のデータがオブジェクト配列でない。");
-
-    // 指定の行のデータ取得
-    CCObject* mapPieceObj = mapPiecesOfColumn->objectAtIndex(m_mapPieceMatrix->count() - 1 - y);
-    MapPiece* mapPiece = dynamic_cast<MapPiece*>(mapPieceObj);
-    CCAssert(mapPiece != NULL, "オブジェクト配列内のデータがマップピースでない。");
-
-    return mapPiece;
-}
-
 void MapPieceManager::removeLastLineMapPieces(CCObject* mapNodeObj) {
     CCAssert(mapNodeObj != NULL, "指定されたオブジェクトが存在しない。");
 
