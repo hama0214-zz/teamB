@@ -1,4 +1,5 @@
 #include "Gamescene.h"
+#include "GameMaster.h"
 
 #include "PlayerSprite.h"
 
@@ -54,10 +55,46 @@ bool GameScene::init()
 
     // マップ移動開始
     moveStart();
+    
+    //スコア類 (あとでrelease!!!!!!!!)
+    GameMaster* master= new GameMaster();
+    master->show();
+    
+    scoreLabel= CCLabelTTF::create("Touch Layer", "arial", 48);
+    scoreLabel->setString(master->scoreStr->getCString());
+
+    scoreLabel->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width * 0.1, CCDirector::sharedDirector()->getWinSize().height * 0.95));
+
+    this->addChild(scoreLabel);
+
+    materLabel= CCLabelTTF::create("Touch Layer", "arial", 48);
+    materLabel->setString(master->scoreStr->getCString());
+    materLabel->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width * 0.5, CCDirector::sharedDirector()->getWinSize().height * 0.95));
+    
+    this->addChild(materLabel);
+
+    materDLabel = CCLabelTTF::create("Touch Layer", "arial", 48);
+    materDLabel->setString(master->materDStr->getCString());
+    materDLabel->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width * 0.5, CCDirector::sharedDirector()->getWinSize().height * 0.05));
+    
+    this->addChild(materDLabel);
+    iMater = 0;
+    //スケジュール
+    this->schedule(schedule_selector(GameScene::upScore), 0.3f);
+    
 
     return true;
     
 }
+void GameScene::upScore() {
+    iMater++;
+//    CCLog("iMater -> %d", iMater);
+    CCString *str = CCString::createWithFormat("%d M", iMater);
+    
+    materLabel->setString(str->getCString());
+    materDLabel->setString(str->getCString());
+}
+
 
 void GameScene::ccTouchesBegan(cocos2d::CCSet *touches,
                                cocos2d::CCEvent *event)
