@@ -17,6 +17,7 @@
 FieldPiece* FieldPiece::create(Variables::PIECE_IMAGE image) {
     FieldPiece *pobSprite = new FieldPiece();
     if (pobSprite && pobSprite->initWithFile(pobSprite->getPszFileName(image))) {
+        pobSprite->pieceImage = image;
         pobSprite->autorelease();
         return pobSprite;
     }
@@ -34,7 +35,7 @@ const char* FieldPiece::getPszFileName(Variables::PIECE_IMAGE image) {
     const char* pszFileName;
     switch (image) {
         case Variables::FIELD_PIECE_IMAGE_0:
-            pszFileName = "Icon-72.png";
+            pszFileName = "field_piece_00.png";
             break;
         case Variables::FIELD_PIECE_IMAGE_1:
             pszFileName = "Icon-72.png";
@@ -46,4 +47,11 @@ const char* FieldPiece::getPszFileName(Variables::PIECE_IMAGE image) {
             break;
     }
     return pszFileName;
+}
+
+/**
+ * コンストラクタ
+ */
+FieldPiece::FieldPiece() {
+    pieceType = Variables::FIELD_PIECE;
 }
