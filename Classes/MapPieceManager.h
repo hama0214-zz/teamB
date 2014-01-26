@@ -10,11 +10,12 @@
 #define __teamB__MapPieceManager__
 
 #include "cocos2d.h"
-#include "Variables.h"
 #include "MapPieceFactory.h"
 #include "Variables.h"
 
 USING_NS_CC;
+
+class MapPiece;
 
 /**
  * マップパーツを管理するクラス。
@@ -43,6 +44,14 @@ public:
      * @return 全てのマップピースオブジェクト。
      */
     CCArray* getAllMapPieces();
+
+    /**
+     * マップ上の座標からマップピースを取得する。
+     * @param x マップ上のx位置。
+     * @param y マップ上のy位置。
+     * @return マップピース。
+     */
+    MapPiece* getMapPieceAtMapPos(int x, int y);
 
 private:
     /** 全てのマップピースオブジェクトを管理する配列 */
