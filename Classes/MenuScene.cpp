@@ -94,6 +94,7 @@ void MenuScene::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
         rect = pBtn1->boundingBox();
         if (rect.containsPoint(touchPoint))
         {
+//            this->unschedule(schedule_selector(MenuScene::pAnime));
             CCScene* scene = GameScene::scene();
             CCTransitionFadeBL* tran = CCTransitionFadeBL::create(1, scene);
             CCDirector::sharedDirector()->replaceScene(tran);

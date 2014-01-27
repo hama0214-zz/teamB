@@ -4,19 +4,25 @@
 #include "cocos2d.h"
 
 
-class GameMaster
+class GameMaster: public cocos2d::CCObject
 {
 public:
-
+    
     void show();
-    void selShow();
+    void showPop(int);
     
     cocos2d::CCSprite* pPop;
     cocos2d::CCString* scoreStr;
     cocos2d::CCString* materStr;
     cocos2d::CCString* materDStr;
-
+    
 private:
+    cocos2d::CCLabelTTF* popLabel1;
+    cocos2d::CCLabelTTF* popLabel2;
+    cocos2d::CCLabelTTF* popLabel3;
+    cocos2d::CCLabelTTF* popLabel4;
+    cocos2d::CCLabelTTF* popLabel5;
+    cocos2d::CCLabelTTF* popLabel6;
 };
 
 #endif //__GAME_MASTER_H__

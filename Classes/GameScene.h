@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "MapPieceManager.h"
+#include "GameMaster.h"
 
 class GameScene: public cocos2d::CCLayer
 {
@@ -39,6 +40,8 @@ private:
     CCLabelTTF* materLabel;
     CCLabelTTF* materDLabel;
     int iMater;
+    
+    GameMaster* gMaster;
 };
 
 #endif //__GAME_SCENE_H__

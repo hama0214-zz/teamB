@@ -1,4 +1,5 @@
 #include "Gamescene.h"
+#include "Menuscene.h"
 #include "GameMaster.h"
 
 #include "PlayerSprite.h"
@@ -33,7 +34,6 @@ bool GameScene::init()
     {
         return false;
     }
-    
     // マップノード
     mapNode = CCNode::create();
     // マップピース設置位置の基点
@@ -44,10 +44,13 @@ bool GameScene::init()
     mapPieceMgr = MapPieceManager::create();
     mapPieceMgr->makeMapForNode(mapNode);
 
+    /*
+    メニューに戻るときに、落ちるのでいったんコメントアウト
     //キャラクター配置
     player = PlayerSprite::create("player_nomal.png");
     player->myInit(100,CCDirector::sharedDirector()->getWinSize().height);
     this->addChild(player);
+    */
     
     //タップイベントを取得する
     this->setTouchMode(kCCTouchesAllAtOnce);
@@ -57,24 +60,24 @@ bool GameScene::init()
     moveStart();
     
     //スコア類 (あとでrelease!!!!!!!!)
-    GameMaster* master= new GameMaster();
-    master->show();
+    gMaster= new GameMaster();
+    gMaster->show();
     
     scoreLabel= CCLabelTTF::create("Touch Layer", "arial", 48);
-    scoreLabel->setString(master->scoreStr->getCString());
+    scoreLabel->setString(gMaster->scoreStr->getCString());
 
     scoreLabel->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width * 0.1, CCDirector::sharedDirector()->getWinSize().height * 0.95));
 
     this->addChild(scoreLabel);
 
     materLabel= CCLabelTTF::create("Touch Layer", "arial", 48);
-    materLabel->setString(master->scoreStr->getCString());
+    materLabel->setString(gMaster->scoreStr->getCString());
     materLabel->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width * 0.5, CCDirector::sharedDirector()->getWinSize().height * 0.95));
     
     this->addChild(materLabel);
 
     materDLabel = CCLabelTTF::create("Touch Layer", "arial", 48);
-    materDLabel->setString(master->materDStr->getCString());
+    materDLabel->setString(gMaster->materDStr->getCString());
     materDLabel->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width * 0.5, CCDirector::sharedDirector()->getWinSize().height * 0.05));
     
     this->addChild(materDLabel);
@@ -82,23 +85,53 @@ bool GameScene::init()
     //スケジュール
     this->schedule(schedule_selector(GameScene::upScore), 0.3f);
     
-
+    
     return true;
     
 }
 void GameScene::upScore() {
     iMater++;
-//    CCLog("iMater -> %d", iMater);
-    CCString *str = CCString::createWithFormat("%d M", iMater);
-    
-    materLabel->setString(str->getCString());
-    materDLabel->setString(str->getCString());
+    //    CCLog("iMater -> %d", iMater);
+    if (iMater > 10) {
+        gMaster->showPop(0);
+        moveStop();
+        this->addChild(gMaster->pPop);
+    } else {
+        CCString *str = CCString::createWithFormat("%d M", iMater);
+        
+        materLabel->setString(str->getCString());
+        materDLabel->setString(str->getCString());
+    }
 }
-
 
 void GameScene::ccTouchesBegan(cocos2d::CCSet *touches,
                                cocos2d::CCEvent *event)
 {
+    CCScene* scene = MenuScene::scene();
+    //            CCTransitionFadeBL* tran = CCTransitionFadeBL::create(1, scene);
+    CCDirector* pDirector = CCDirector::sharedDirector();
+    pDirector->replaceScene(scene);
+    
+    CCTouch *pTouch = (CCTouch *)touches->anyObject();
+    CCPoint touchPoint = pDirector->convertToGL(pTouch->getLocationInView());
+    
+    //戻るボタン
+    CCRect rect;
+    if (gMaster->pPop != NULL){
+        rect= gMaster->pPop->boundingBox();
+        if (rect.containsPoint(touchPoint))
+        {
+            gMaster->release();
+
+            CCScene* scene = MenuScene::scene();
+//            CCTransitionFadeBL* tran = CCTransitionFadeBL::create(1, scene);
+            pDirector->replaceScene(scene);
+
+            return;
+        }
+    }
+
+    
     player->jump();
     CCLog("pAction %d ",player->getpStatus());
 }
