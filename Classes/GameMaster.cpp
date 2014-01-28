@@ -44,7 +44,7 @@ void GameMaster::showPop(int Stat)
     popLabel5->setString("65535P");
     popLabel5->setPosition(ccp(popSize.width * 0.7, popSize.height * 0.4));
     
-    CCSprite* popBtn = CCSprite::create("pop_btn1.gif");
+    popBtn = CCSprite::create("pop_btn1.gif");
     popBtn->setPosition(ccp(popSize.width * 0.5, popSize.height * 0.2));
     popBtn->setScale(0.5);
     
@@ -53,6 +53,6 @@ void GameMaster::showPop(int Stat)
     pPop->addChild(popLabel3);
     pPop->addChild(popLabel4);
     pPop->addChild(popLabel5);
-    pPop->addChild(popBtn);
+//    pPop->addChild(popBtn);
     
 }

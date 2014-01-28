@@ -15,7 +15,7 @@ public:
     cocos2d::CCString* scoreStr;
     cocos2d::CCString* materStr;
     cocos2d::CCString* materDStr;
-    
+    cocos2d::CCSprite* popBtn;
 private:
     cocos2d::CCLabelTTF* popLabel1;
     cocos2d::CCLabelTTF* popLabel2;

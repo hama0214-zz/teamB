@@ -92,10 +92,13 @@ bool GameScene::init()
 void GameScene::upScore() {
     iMater++;
     //    CCLog("iMater -> %d", iMater);
-    if (iMater > 10) {
+    if (iMater > 50) {
         gMaster->showPop(0);
         moveStop();
         this->addChild(gMaster->pPop);
+        gMaster->popBtn->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width * 0.5, CCDirector::sharedDirector()->getWinSize().height * 0.2));
+        gMaster->popBtn->setScale(1.5);
+        this->addChild(gMaster->popBtn);
     } else {
         CCString *str = CCString::createWithFormat("%d M", iMater);
         
@@ -107,10 +110,7 @@ void GameScene::upScore() {
 void GameScene::ccTouchesBegan(cocos2d::CCSet *touches,
                                cocos2d::CCEvent *event)
 {
-    CCScene* scene = MenuScene::scene();
-    //            CCTransitionFadeBL* tran = CCTransitionFadeBL::create(1, scene);
     CCDirector* pDirector = CCDirector::sharedDirector();
-    pDirector->replaceScene(scene);
     
     CCTouch *pTouch = (CCTouch *)touches->anyObject();
     CCPoint touchPoint = pDirector->convertToGL(pTouch->getLocationInView());
@@ -118,7 +118,7 @@ void GameScene::ccTouchesBegan(cocos2d::CCSet *touches,
     //戻るボタン
     CCRect rect;
     if (gMaster->pPop != NULL){
-        rect= gMaster->pPop->boundingBox();
+        rect= gMaster->popBtn->boundingBox();
         if (rect.containsPoint(touchPoint))
         {
             gMaster->release();
@@ -129,11 +129,10 @@ void GameScene::ccTouchesBegan(cocos2d::CCSet *touches,
 
             return;
         }
+    } else {
+        player->jump();
+        CCLog("pAction %d ",player->getpStatus());
     }
-
-    
-    player->jump();
-    CCLog("pAction %d ",player->getpStatus());
 }
 
 void GameScene::moveStart() {
