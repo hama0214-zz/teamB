@@ -3,6 +3,7 @@
 #include "GameMaster.h"
 
 #include "PlayerSprite.h"
+#include "PlayerSpine.h"
 
 using namespace cocos2d;
 using namespace std;
@@ -51,6 +52,10 @@ bool GameScene::init()
     player->myInit(100,CCDirector::sharedDirector()->getWinSize().height);
     this->addChild(player);
     */
+    
+    playerSpine = PlayerSpine::create();
+    CCAssert(playerSpine != NULL, "プレイヤーの生成に失敗した。");
+    addChild(playerSpine);
     
     //タップイベントを取得する
     this->setTouchMode(kCCTouchesAllAtOnce);
@@ -130,8 +135,9 @@ void GameScene::ccTouchesBegan(cocos2d::CCSet *touches,
             return;
         }
     } else {
-        player->jump();
-        CCLog("pAction %d ",player->getpStatus());
+//        player->jump();
+//        CCLog("pAction %d ",player->getpStatus());
+        playerSpine->jump();
     }
 }
 

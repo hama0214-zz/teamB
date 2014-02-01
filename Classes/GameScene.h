@@ -5,6 +5,8 @@
 #include "MapPieceManager.h"
 #include "GameMaster.h"
 
+class PlayerSpine;
+
 class GameScene: public cocos2d::CCLayer
 {
 public:
@@ -27,6 +29,9 @@ private:
 
     /** マップピースのオブジェクトを設置するノード */
     CCNode* mapNode;
+    
+    /** プレイヤー */
+    PlayerSpine* playerSpine;
 
     /** マップ移動開始 */
     void moveStart();
