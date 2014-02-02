@@ -16,22 +16,31 @@ USING_NS_CC;
 
 class MapPiece : public CCSprite {
 public:
-    /** ピースタイプを取得する */
+    /** 
+     * ピースタイプを取得する。
+     * @return ピースタイプ。
+     * Created by C15 川辺兼嗣
+     */
     virtual Variables::PIECE_TYPE getPieceType() const = 0;
     
     // TODO:ぶつかったのが上か横かなどの判定をするときは、引数にCCRectを入れて内部判断するといいかも
-    /** プレイヤーにぶつかったときの処理 */
+    /**
+     * プレイヤーにぶつかったときの処理
+     * Created by C15 川辺兼嗣
+     */
     virtual void hitPlayer() = 0;
     
     /**
      * 活動状態を取得する。
      * @return 活動状態かどうか
+     * Created by C15 川辺兼嗣
      */
     virtual bool getIsLive() const = 0;
     
     /**
      * 当たり判定を取得する。
      * @return 当たり判定。
+     * Created by C15 川辺兼嗣
      */
     virtual const CCRect& getRect() = 0;
 };

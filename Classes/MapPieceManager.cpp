@@ -2,7 +2,7 @@
 //  MapPieceManager.cpp
 //  teamB
 //
-//  Created by cocos2d-x on 2014/01/19.
+//  Created by C15 川辺兼嗣 on 2014/01/19.
 //
 //
 
@@ -128,6 +128,7 @@ void MapPieceManager::removeLastLineMapPieces(CCObject* mapNodeObj) {
     CCArray* mapLine = dynamic_cast<CCArray*>(m_mapPieceMatrix->objectAtIndex(0));
     CCAssert(mapLine != NULL, "マップピースオブジェクト管理配列内のデータがオブジェクト配列でない。");
 
+    // オブジェクトを削除するので、配列の後ろからfor文をまわす
     for (int i = MapPieceManager::MAP_HEIGHT - 1; i >= 0; i--) {
         MapPiece* mapPiece = dynamic_cast<MapPiece*>(mapLine->objectAtIndex(i));
         CCAssert(mapPiece != NULL, "オブジェクト配列内のデータがマップピースでない。");

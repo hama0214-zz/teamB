@@ -2,7 +2,7 @@
 //  PieceData.h
 //  teamB
 //
-//  Created by Kenji on 14/02/02.
+//  Created by C15 川辺兼嗣 on 2014/02/02.
 //
 //
 

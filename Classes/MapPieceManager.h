@@ -2,7 +2,7 @@
 //  MapPieceManager.h
 //  teamB
 //
-//  Created by cocos2d-x on 2014/01/19.
+//  Created by C15 川辺兼嗣 on 2014/01/19.
 //
 //
 

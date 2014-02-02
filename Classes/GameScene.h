@@ -19,18 +19,21 @@ public:
     /**
      * プレイヤーを取得する。
      * @return プレイヤー
+     * Created by C15 川辺兼嗣
      */
     inline PlayerSpine* getPlayerSpine() const {return playerSpine;}
     
     /**
      * マップマネージャーを取得する。
      * @return マップマネージャー
+     * Created by C15 川辺兼嗣
      */
     inline MapPieceManager* getMapMgr() const {return mapPieceMgr;}
 
     /**
      * マップレイヤーの位置を取得する。
      * @return マップレイヤーの位置
+     * Created by C15 川辺兼嗣
      */
     const CCPoint& getMapPosition();
 
@@ -50,10 +53,16 @@ private:
     /** プレイヤー */
     PlayerSpine* playerSpine;
 
-    /** マップ移動開始 */
+    /** 
+     * マップ移動開始
+     * Created by C15 川辺兼嗣
+     */
     void moveStart();
 
-    /** マップの移動停止 */
+    /**
+     * マップの移動停止 
+     * Created by C15 川辺兼嗣
+     */
     void moveStop();
     
     /** スコア類の更新 */
