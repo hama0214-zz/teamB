@@ -1,5 +1,5 @@
 //
-//  ItemPiece.h
+//  ItemPiece.h（結局使わなかった）
 //  teamB
 //
 //  Created by Yuto Yoshinari on 2014/01/26.
@@ -15,21 +15,24 @@
 USING_NS_CC;
 
 class ItemPiece : public MapPiece {
+    // privateプロパティ
     Variables::PIECE_TYPE  pieceType;
     Variables::PIECE_IMAGE pieceImage;
+    CCRect rect;
     bool isUsed;
 
+    // privateメソッド
     const char* getPszFileName(Variables::PIECE_IMAGE image);
+    
+public:
+    // publicメソッド
+    ItemPiece();
+    static ItemPiece* create(Variables::PIECE_IMAGE image);
+    void use();
     Variables::PIECE_TYPE getPieceType() const;
     void hitPlayer();
     bool getIsLive() const;
     const CCRect& getRect(const CCPoint& mapPosition);
-public:
-    CCRect rect;
-
-    static ItemPiece* create(Variables::PIECE_IMAGE image);
-    ItemPiece();
-    void use();
 };
 
 #endif /* defined(__teamB__ItemPiece__) */

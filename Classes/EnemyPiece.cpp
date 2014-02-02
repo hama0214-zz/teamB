@@ -10,6 +10,16 @@
 #include "MapPieceManager.h"
 
 /**
+ * コンストラクタ
+ * @public
+ */
+EnemyPiece::EnemyPiece() {
+    isAlive = true;
+    pieceType = Variables::ENEMY_PIECE;
+    rect = CCRectMake(0, 0, MapPieceManager::CELL_WIDTH, MapPieceManager::CELL_HEIGHT);
+}
+
+/**
  * FieldPieceを生成するクラスメソッド
  * @static
  * @param {Variables::PIECE_IMAGE} image
@@ -34,28 +44,17 @@ EnemyPiece* EnemyPiece::create(Variables::PIECE_IMAGE image) {
  * @return {const char*}
  */
 const char* EnemyPiece::getPszFileName(Variables::PIECE_IMAGE image) {
-    const char* pszFileName;
-    switch (image) {
-        case Variables::ENEMY_PIECE_IMAGE_0:
-            pszFileName = "empty_piece.png";
-            break;
-        default:
-            break;
-    }
-    return pszFileName;
+    // 背景画像要らないから透明な画像を返す
+    return "empty_piece.png";
 }
 
 /**
- * コンストラクタ
+ * 敵のスパインデータを生成するメソッド
+ * @private
  */
-EnemyPiece::EnemyPiece() {
-    isAlive = true;
-    pieceType = Variables::ENEMY_PIECE;
-    rect = CCRectMake(0, 0, MapPieceManager::CELL_WIDTH, MapPieceManager::CELL_HEIGHT);
-}
-
 void EnemyPiece::createEnemy() {
-        
+    
+    // Spineから敵のデータを生成
     switch (pieceImage) {
         case Variables::ENEMY_PIECE_IMAGE_0: {
             CCSkeletonAnimation* enemy = CCSkeletonAnimation::createWithFile("dragon.json", "dragon.atlas");
@@ -95,6 +94,7 @@ void EnemyPiece::createEnemy() {
 
 /**
  * 死ぬ際に呼ばれるメソッド
+ * @public
  */
 void EnemyPiece::die() {
     isAlive = false;
@@ -107,19 +107,36 @@ void EnemyPiece::die() {
     runAction(sequence);
 }
 
+
+/**
+ * ピースのタイプを取得するメソッド
+ * @public
+ */
 Variables::PIECE_TYPE EnemyPiece::getPieceType() const {
     return pieceType;
 }
 
+/**
+ * ピースに当たったときの処理を行うメソッド
+ * @public
+ */
 void EnemyPiece::hitPlayer() {
     // 何もしない
     setVisible(false);
 }
 
+/**
+ * ピースが生存しているかどうかを返すメソッド
+ * @public
+ */
 bool EnemyPiece::getIsLive() const {
     return isAlive;
 }
 
+/**
+ * ピースのrect情報を取得する
+ * @public
+ */
 const CCRect& EnemyPiece::getRect(const CCPoint& mapPosition) {
     rect.setRect(getPositionX() + mapPosition.x - MapPieceManager::CELL_WIDTH / 2.0f,
                  getPositionY() - MapPieceManager::CELL_HEIGHT / 2.0f,

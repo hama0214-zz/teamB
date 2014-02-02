@@ -1,5 +1,5 @@
 //
-//  ItemPiece.cpp
+//  ItemPiece.cpp（結局使わなかった）
 //  teamB
 //
 //  Created by Yuto Yoshinari on 2014/01/26.
@@ -10,10 +10,18 @@
 #include "MapPieceManager.h"
 
 /**
+ * コンストラクタ
+ * @public
+ */
+ItemPiece::ItemPiece() {
+    isUsed = false;
+    pieceType = Variables::ITEM_PIECE;
+    rect = CCRectMake(0, 0, MapPieceManager::CELL_WIDTH, MapPieceManager::CELL_HEIGHT);
+}
+
+/**
  * FieldPieceを生成するクラスメソッド
  * @static
- * @param {Variables::PIECE_IMAGE} image
- * @return {FieldPiece*}
  */
 ItemPiece* ItemPiece::create(Variables::PIECE_IMAGE image) {
     ItemPiece *pobSprite = new ItemPiece();
@@ -29,8 +37,6 @@ ItemPiece* ItemPiece::create(Variables::PIECE_IMAGE image) {
 /**
  * 対象の画像名を返すメソッド
  * @private
- * @param {Variables::PIECE_IMAGE} image
- * @return {const char*}
  */
 const char* ItemPiece::getPszFileName(Variables::PIECE_IMAGE image) {
     const char* pszFileName;
@@ -45,16 +51,8 @@ const char* ItemPiece::getPszFileName(Variables::PIECE_IMAGE image) {
 }
 
 /**
- * コンストラクタ
- */
-ItemPiece::ItemPiece() {
-    isUsed = false;
-    pieceType = Variables::ITEM_PIECE;
-    rect = CCRectMake(0, 0, MapPieceManager::CELL_WIDTH, MapPieceManager::CELL_HEIGHT);
-}
-
-/**
  * アイテムを使用する際に呼ばれるメソッド
+ * @public
  */
 void ItemPiece::use() {
     isUsed = true;
@@ -66,19 +64,35 @@ void ItemPiece::use() {
     // Todo: 効果を発動する
 }
 
+/**
+ * ピースのタイプを取得するメソッド
+ * @public
+ */
 Variables::PIECE_TYPE ItemPiece::getPieceType() const {
     return Variables::ITEM_PIECE;
 }
 
+/**
+ * ピースに当たったときの処理を行うメソッド
+ * @public
+ */
 void ItemPiece::hitPlayer() {
     use();
     setVisible(false);
 }
 
+/**
+ * ピースが生存しているかどうかを返すメソッド
+ * @public
+ */
 bool ItemPiece::getIsLive() const {
     return !isUsed;
 }
 
+/**
+ * ピースのrect情報を取得する
+ * @public
+ */
 const CCRect& ItemPiece::getRect(const CCPoint& mapPosition) {
     rect.setRect(getPositionX() + mapPosition.x - MapPieceManager::CELL_WIDTH / 2.0f,
                  getPositionY() - MapPieceManager::CELL_HEIGHT / 2.0f,

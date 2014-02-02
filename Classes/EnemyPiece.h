@@ -17,22 +17,25 @@ USING_NS_CC;
 using namespace cocos2d::extension;
 
 class EnemyPiece : public MapPiece {
+    // privateプロパティ
     Variables::PIECE_TYPE  pieceType;
     Variables::PIECE_IMAGE pieceImage;
     bool isAlive;
-    
+    CCRect rect;
+
+    // privateメソッド
     const char* getPszFileName(Variables::PIECE_IMAGE image);
+    void createEnemy();
+
+public:
+    // publicメソッド
+    EnemyPiece();
+    static EnemyPiece* create(Variables::PIECE_IMAGE image);
+    void die();
     Variables::PIECE_TYPE getPieceType() const;
     void hitPlayer();
     bool getIsLive() const;
     const CCRect& getRect(const CCPoint& mapPosition);
-public:
-    CCRect rect;
-    
-    static EnemyPiece* create(Variables::PIECE_IMAGE image);
-    void createEnemy();
-    EnemyPiece();
-    void die();
 };
 
 #endif /* defined(__teamB__EnemyPiece__) */
