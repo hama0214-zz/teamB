@@ -35,6 +35,12 @@ bool GameScene::init()
     {
         return false;
     }
+    
+    // 背景レイヤー
+    bgLayer = BackgroundLayer::create();
+    bgLayer->setPosition(CCDirector::sharedDirector()->getWinSize().width * 0.5, CCDirector::sharedDirector()->getWinSize().height * 0.5);
+    addChild(bgLayer);
+    
     // マップノード
     mapNode = CCNode::create();
     // マップピース設置位置の基点
@@ -89,7 +95,6 @@ bool GameScene::init()
     iMater = 0;
     //スケジュール
     this->schedule(schedule_selector(GameScene::upScore), 0.3f);
-    
     
     return true;
     
@@ -148,10 +153,12 @@ void GameScene::moveStart() {
     CCRepeatForever* moveRep = CCRepeatForever::create(moveSeq);
     moveRep->setTag(GameScene::TAG_MAP_MOVE_EVENT);
     mapNode->runAction(moveRep);
+    bgLayer->moveStart();
 }
 
 void GameScene::moveStop() {
     mapNode->stopActionByTag(GameScene::TAG_MAP_MOVE_EVENT);
+    bgLayer->moveStop();
 }
 
 const CCPoint& GameScene::getMapPosition() {

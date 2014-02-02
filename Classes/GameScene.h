@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "MapPieceManager.h"
+#include "BackgroundLayer.h"
 #include "GameMaster.h"
 
 class PlayerSpine;
@@ -53,6 +54,9 @@ private:
     /** プレイヤー */
     PlayerSpine* playerSpine;
 
+    /** 背景レイヤー */
+    BackgroundLayer* bgLayer;
+    
     /** 
      * マップ移動開始
      * Created by C15 川辺兼嗣
