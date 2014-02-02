@@ -63,6 +63,8 @@ Variables::PIECE_IMAGE PieceData::convertToImageType(int imageTypeValue) {
             return Variables::ENEMY_PIECE_IMAGE_0;
         case 7:
             return Variables::ENEMY_PIECE_IMAGE_1;
+        case 8:
+            return Variables::ENEMY_PIECE_IMAGE_2;
         default:
             CCAssert(false, "不正な数を指定された。");
             break;

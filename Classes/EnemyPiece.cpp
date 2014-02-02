@@ -68,8 +68,21 @@ void EnemyPiece::createEnemy() {
         }
         case Variables::ENEMY_PIECE_IMAGE_1: {
             CCSkeletonAnimation* enemy = CCSkeletonAnimation::createWithFile("goblins.json", "goblins.atlas");
-            enemy->setPosition(ccp(40, 20));
-            enemy->setScale(-0.15, 0.15); // 左右を反転させている
+            enemy->setSkin("goblin");
+            enemy->setToSetupPose();
+            enemy->setPosition(ccp(40, -40));
+            enemy->setScale(-0.35, 0.35); // 左右を反転させている
+            enemy->setAnimation("walk", true);
+            enemy->timeScale = 1.5f; // 再生スピード。1で等倍。
+            addChild(enemy);
+            break;
+        }
+        case Variables::ENEMY_PIECE_IMAGE_2: {
+            CCSkeletonAnimation* enemy = CCSkeletonAnimation::createWithFile("goblins.json", "goblins.atlas");
+            enemy->setSkin("goblingirl");
+            enemy->setToSetupPose();
+            enemy->setPosition(ccp(40, -40));
+            enemy->setScale(-0.35, 0.35); // 左右を反転させている
             enemy->setAnimation("walk", true);
             enemy->timeScale = 1.5f; // 再生スピード。1で等倍。
             addChild(enemy);
