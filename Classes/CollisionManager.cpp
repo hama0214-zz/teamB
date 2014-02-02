@@ -58,9 +58,12 @@ void CollisionManager::updateCollisionCheck()
         }
         
         mapPiece->hitPlayer();
+        
+        Variables::PIECE_TYPE pieceType = mapPiece->getPieceType();
+        playerSpine->hitObject(pieceType);
 
         // ゲームシーンへ送るイベント
-        switch (mapPiece->getPieceType()) {
+        switch (pieceType) {
             // 敵との衝突
             case Variables::ENEMY_PIECE:
                 m_gameScene->moveStop();

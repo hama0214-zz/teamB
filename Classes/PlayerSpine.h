@@ -20,8 +20,7 @@ using namespace cocos2d::extension;
  * プレイヤークラス。
  * Spine（http://esotericsoftware.com）のオブジェクトを扱う。
  *
- * http://www.slideshare.net/
- /20130625-cocos2d-xspine
+ * http://www.slideshare.net/doraemonsss/20130625-cocos2d-xspine
  * 上記URLに清水さんによる簡単な使い方が紹介されています。
  */
 class PlayerSpine: public CCSkeletonAnimation
@@ -41,7 +40,10 @@ public:
      * @return 当たり判定。
      */
     const CCRect& getRect();
-    
+
+    /** あたり判定*/
+    void hitObject(Variables::PIECE_TYPE);
+
 private:
     /** スケルトンデータファイル名 */
     static const char* JSON_FILE_NAME;
@@ -114,9 +116,6 @@ private:
     
     /** 再生スピードを等倍に戻して、アニメーションを再生する。 */
 	void setAnimation(const char* name, bool loop, int stateIndex = 0);
-    
-    /** あたり判定*/
-    void hitObject(Variables::PIECE_TYPE);
     
     /** 走る */
     void run();
