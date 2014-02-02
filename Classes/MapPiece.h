@@ -14,6 +14,7 @@
 
 USING_NS_CC;
 
+// 全てのピースクラスの親クラス
 class MapPiece : public CCSprite {
 public:
     /** 
