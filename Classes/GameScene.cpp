@@ -106,21 +106,10 @@ bool GameScene::init()
 }
 void GameScene::upScore() {
     iMater++;
-    //    CCLog("iMater -> %d", iMater);
-    if (iMater > 50) {
-        playerSpine->goal();
-        gMaster->showPop(0);
-        moveStop();
-        this->addChild(gMaster->pPop);
-        gMaster->popBtn->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width * 0.5, CCDirector::sharedDirector()->getWinSize().height * 0.2));
-        gMaster->popBtn->setScale(1.5);
-        this->addChild(gMaster->popBtn);
-    } else {
-        CCString *str = CCString::createWithFormat("%d M", iMater);
-        
-        materLabel->setString(str->getCString());
-        materDLabel->setString(str->getCString());
-    }
+    CCString *str = CCString::createWithFormat("%d M", iMater);
+
+    materLabel->setString(str->getCString());
+    materDLabel->setString(str->getCString());
 }
 
 void GameScene::ccTouchesBegan(cocos2d::CCSet *touches,
@@ -156,7 +145,8 @@ void GameScene::moveStart() {
     // マップピースが動く
     CCMoveBy* move = CCMoveBy::create(GameScene::MAP_MOVE_SPEED, ccp(-MapPieceManager::CELL_WIDTH, 0));
     CCCallFuncO* removeLastLineFunc = CCCallFuncO::create((CCObject*)mapPieceMgr, callfuncO_selector(MapPieceManager::removeLastLineMapPieces), mapNode);
-    CCSequence* moveSeq = CCSequence::create(move, removeLastLineFunc, NULL);
+    CCCallFunc* checkGoalFunc = CCCallFunc::create(this, callfunc_selector(GameScene::cheackGoal));
+    CCSequence* moveSeq = CCSequence::create(move, removeLastLineFunc, checkGoalFunc, NULL);
     CCRepeatForever* moveRep = CCRepeatForever::create(moveSeq);
     moveRep->setTag(GameScene::TAG_MAP_MOVE_EVENT);
     mapNode->runAction(moveRep);
@@ -188,4 +178,18 @@ void GameScene::gameover() {
     this->unschedule(schedule_selector(GameScene::upScore));
     gMaster->showPop(1);
     this->addChild(gMaster->pPop);
+}
+
+void GameScene::cheackGoal() {
+    // 最後のマスまで走りきっていなければゴールではない
+    if (mapPieceMgr->getAllMapPieces()->count() != MapPieceManager::MAP_HEIGHT) {
+        return;
+    }
+    
+    gMaster->showPop(0);
+    moveStop();
+    this->addChild(gMaster->pPop);
+    gMaster->popBtn->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width * 0.5, CCDirector::sharedDirector()->getWinSize().height * 0.2));
+    gMaster->popBtn->setScale(1.5);
+    this->addChild(gMaster->popBtn);
 }

@@ -67,9 +67,13 @@ void CollisionManager::updateCollisionCheck()
             // 敵との衝突
             case Variables::ENEMY_PIECE:
                 m_gameScene->moveStop();
-
+            {
                 // TODO:このメソッドはできればプレイヤーのやられ演出が終わってから呼びたい。
-                m_gameScene->gameover();
+                CCDelayTime* gameoverDelay = CCDelayTime::create(1.5f);
+                CCCallFunc* gameoverFunc = CCCallFunc::create(m_gameScene, callfunc_selector(GameScene::gameover));
+                CCSequence* gameoverSeq = CCSequence::create(gameoverDelay, gameoverFunc, NULL);
+                m_gameScene->runAction(gameoverSeq);
+            }
                 break;
 
             case Variables::FIELD_PIECE:

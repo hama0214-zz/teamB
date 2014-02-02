@@ -54,9 +54,6 @@ private:
     /** アトラスデータファイル名 */
     static const char* ATLAS_FILE_NAME;
     
-    /** 待機のアニメ名 */
-    static const char* STAY_ANIM_NAME;
-    
     /** 走りのアニメ名 */
     static const char* RUN_ANIM_NAME;
     
