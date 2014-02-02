@@ -7,7 +7,9 @@
 class GameMaster: public cocos2d::CCObject
 {
 public:
-    
+    int iPoint;
+    int iMater;
+
     void show();
     void showPop(int);
     
