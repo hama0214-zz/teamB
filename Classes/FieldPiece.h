@@ -15,19 +15,21 @@
 USING_NS_CC;
 
 class FieldPiece : public MapPiece {
+    // privateプロパティ
     Variables::PIECE_TYPE  pieceType;
     Variables::PIECE_IMAGE pieceImage;
+    CCRect rect;
 
+    // privateメソッド
     const char* getPszFileName(Variables::PIECE_IMAGE image);
+public:
+    // publicプロパティ
+    FieldPiece();
+    static FieldPiece* create(Variables::PIECE_IMAGE image);
     Variables::PIECE_TYPE getPieceType() const;
     void hitPlayer();
     bool getIsLive() const;
     const CCRect& getRect(const CCPoint& mapPosition);
-public:
-    CCRect rect;
-
-    static FieldPiece* create(Variables::PIECE_IMAGE image);
-    FieldPiece();
 };
 
 #endif /* defined(__teamB__FieldPiece__) */

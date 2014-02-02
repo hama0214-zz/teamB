@@ -10,6 +10,15 @@
 #include "MapPieceManager.h"
 
 /**
+ * コンストラクタ
+ * @public
+ */
+FieldPiece::FieldPiece() {
+    pieceType = Variables::FIELD_PIECE;
+    rect = CCRectMake(0, 0, MapPieceManager::CELL_WIDTH, MapPieceManager::CELL_HEIGHT);
+}
+
+/**
  * FieldPieceを生成するクラスメソッド
  * @static
  * @param {Variables::PIECE_IMAGE} image
@@ -51,26 +60,34 @@ const char* FieldPiece::getPszFileName(Variables::PIECE_IMAGE image) {
 }
 
 /**
- * コンストラクタ
+ * ピースのタイプを取得するメソッド
+ * @public
  */
-FieldPiece::FieldPiece() {
-    pieceType = Variables::FIELD_PIECE;
-    rect = CCRectMake(0, 0, MapPieceManager::CELL_WIDTH, MapPieceManager::CELL_HEIGHT);
-}
-
 Variables::PIECE_TYPE FieldPiece::getPieceType() const {
     return pieceType;
 }
 
+/**
+ * ピースに当たったときの処理を行うメソッド
+ * @public
+ */
 void FieldPiece::hitPlayer() {
     // 何もしない
     setVisible(false);
 }
 
+/**
+ * ピースが生存しているかどうかを返すメソッド
+ * @public
+ */
 bool FieldPiece::getIsLive() const {
     return true;
 }
 
+/**
+ * ピースのrect情報を取得する
+ * @public
+ */
 const CCRect& FieldPiece::getRect(const CCPoint& mapPosition) {
     rect.setRect(getPositionX() + mapPosition.x - MapPieceManager::CELL_WIDTH / 2.0f,
                  getPositionY() - MapPieceManager::CELL_HEIGHT / 2.0f,
