@@ -100,7 +100,15 @@ bool GameScene::init()
     iMater = 0;
     //スケジュール
     this->schedule(schedule_selector(GameScene::upScore), 0.3f);
-    
+
+    /////Spineサンプル
+    CCSkeletonAnimation* dragon = CCSkeletonAnimation::createWithFile("dragon.json", "dragon.atlas");
+    dragon->setPosition(ccp(300, 300));
+    dragon->setAnimation("flying", true); // アニメ名と、ループするかどうか
+    // dragon->timeScale = 2.0f; // 再生スピード。1で等倍。数字が大きいほど早い。お好みで。
+    // dragon->setScaleX(-1); // 向き反転
+    addChild(dragon);
+    /////サンプルここまで
     return true;
     
 }
