@@ -64,14 +64,16 @@ Variables::PIECE_TYPE FieldPiece::getPieceType() const {
 
 void FieldPiece::hitPlayer() {
     // 何もしない
+    CCLOG("Hit Field.");
+    setVisible(false);
 }
 
 bool FieldPiece::getIsLive() const {
     return true;
 }
 
-const CCRect& FieldPiece::getRect() {
-    rect.setRect(getPositionX() - MapPieceManager::CELL_WIDTH / 2.0f,
+const CCRect& FieldPiece::getRect(const CCPoint& mapPosition) {
+    rect.setRect(getPositionX() + mapPosition.x - MapPieceManager::CELL_WIDTH / 2.0f,
                  getPositionY() - MapPieceManager::CELL_HEIGHT / 2.0f,
                  MapPieceManager::CELL_WIDTH,
                  MapPieceManager::CELL_HEIGHT);

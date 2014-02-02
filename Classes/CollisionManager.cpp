@@ -50,11 +50,10 @@ void CollisionManager::updateCollisionCheck()
         mapPiece = dynamic_cast<MapPiece*>(mapPieceObj);
         CCAssert(mapPiece != NULL, "マップピースオブジェクト配列内のデータがマップピースでない。");
         
-        if (!mapPiece->getIsLive() || playerRect.intersectsRect(mapPiece->getRect())) {
+        if (!mapPiece->getIsLive() || !playerRect.intersectsRect(mapPiece->getRect(mapPosition))) {
             continue;
         }
         
-        
-        
+        mapPiece->hitPlayer();
     }
 }

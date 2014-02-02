@@ -72,14 +72,16 @@ Variables::PIECE_TYPE ItemPiece::getPieceType() const {
 
 void ItemPiece::hitPlayer() {
     use();
+    CCLOG("Hit Item.");
+    setVisible(false);
 }
 
 bool ItemPiece::getIsLive() const {
     return !isUsed;
 }
 
-const CCRect& ItemPiece::getRect() {
-    rect.setRect(getPositionX() - MapPieceManager::CELL_WIDTH / 2.0f,
+const CCRect& ItemPiece::getRect(const CCPoint& mapPosition) {
+    rect.setRect(getPositionX() + mapPosition.x - MapPieceManager::CELL_WIDTH / 2.0f,
                  getPositionY() - MapPieceManager::CELL_HEIGHT / 2.0f,
                  MapPieceManager::CELL_WIDTH,
                  MapPieceManager::CELL_HEIGHT);

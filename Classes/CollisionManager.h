@@ -15,7 +15,7 @@ USING_NS_CC;
 
 class GameScene;
 
-class CollisionManager : CCObject
+class CollisionManager : public CCObject
 {
 public:
     /**
@@ -24,6 +24,9 @@ public:
      * @return インスタンス
      */
     static CollisionManager* create(GameScene* gameScene);
+    
+    /** 衝突を検出する */
+    void updateCollisionCheck();
     
 private:
     /** ゲームシーン */
@@ -38,10 +41,6 @@ private:
      * @return 初期化に成功したかどうか。
      */
     bool init(GameScene* gameScene);
-
-    /** 衝突を検出する */
-    void updateCollisionCheck();
-
 };
 
 #endif /* defined(__teamB__CollisionManager__) */

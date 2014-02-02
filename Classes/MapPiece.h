@@ -42,7 +42,7 @@ public:
      * @return 当たり判定。
      * Created by C15 川辺兼嗣
      */
-    virtual const CCRect& getRect() = 0;
+    virtual const CCRect& getRect(const CCPoint& mapPosition) = 0;
 };
 
 #endif /* defined(__teamB__MapPiece__) */

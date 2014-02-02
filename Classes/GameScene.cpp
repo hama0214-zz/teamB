@@ -4,6 +4,7 @@
 
 #include "PlayerSprite.h"
 #include "PlayerSpine.h"
+#include "CollisionManager.h"
 
 using namespace cocos2d;
 using namespace std;
@@ -13,8 +14,10 @@ using namespace std;
 const float GameScene::MAP_MOVE_SPEED = 0.2f;
 
 // マップの移動アクションのタグ
-// 値の100は適当。アクションの数字が被らなければ何でもいい。数が多くなってくるようならルールを決める。
 const int GameScene::TAG_MAP_MOVE_EVENT = 100;
+
+// 衝突判定アクションのタグ
+const int GameScene::TAG_COLLISION_CHECK_EVENT = 200;
 
 //キャラクターの作成
 PlayerSprite *player;
@@ -44,6 +47,8 @@ bool GameScene::init()
     // マップマネージャー
     mapPieceMgr = MapPieceManager::create();
     mapPieceMgr->makeMapForNode(mapNode);
+
+    colMgr = CollisionManager::create(this);
 
     /*
     メニューに戻るときに、落ちるのでいったんコメントアウト
@@ -142,16 +147,29 @@ void GameScene::ccTouchesBegan(cocos2d::CCSet *touches,
 }
 
 void GameScene::moveStart() {
+    // マップピースが動く
     CCMoveBy* move = CCMoveBy::create(GameScene::MAP_MOVE_SPEED, ccp(-MapPieceManager::CELL_WIDTH, 0));
     CCCallFuncO* removeLastLineFunc = CCCallFuncO::create((CCObject*)mapPieceMgr, callfuncO_selector(MapPieceManager::removeLastLineMapPieces), mapNode);
     CCSequence* moveSeq = CCSequence::create(move, removeLastLineFunc, NULL);
     CCRepeatForever* moveRep = CCRepeatForever::create(moveSeq);
     moveRep->setTag(GameScene::TAG_MAP_MOVE_EVENT);
     mapNode->runAction(moveRep);
+
+    // 衝突判定開始
+    CCDelayTime* checkDelay = CCDelayTime::create(0.1f);
+    CCCallFunc* checkFunc = CCCallFunc::create(colMgr, callfunc_selector(CollisionManager::updateCollisionCheck));
+    CCSequence* checkSeq = CCSequence::create(checkDelay, checkFunc, NULL);
+    CCRepeatForever* checkRep = CCRepeatForever::create(checkSeq);
+    checkRep->setTag(GameScene::TAG_COLLISION_CHECK_EVENT);
+    runAction(checkRep);
 }
 
 void GameScene::moveStop() {
+    // マップピースがとまる
     mapNode->stopActionByTag(GameScene::TAG_MAP_MOVE_EVENT);
+
+    // 衝突判定停止
+    stopActionByTag(GameScene::TAG_COLLISION_CHECK_EVENT);
 }
 
 const CCPoint& GameScene::getMapPosition() {
