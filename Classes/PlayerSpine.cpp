@@ -142,7 +142,7 @@ void PlayerSpine::jump()
         }
         
         // ジャンプ
-        CCJumpTo* jump = CCJumpTo::create(0.9f, ccp(200, 180), 200, 1);
+        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 180), 300, 1);
         CCRotateBy* rotate =CCRotateBy::create(0.5f,360);
         CCSpawn* spawn=CCSpawn::create(rotate,jump,NULL);
         
