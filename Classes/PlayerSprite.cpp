@@ -113,6 +113,8 @@ bool PlayerSprite::jump()
     return true;
 }
 
+
+
 /**
  * 内部用。キャラクターがいるとき毎フレーム処理されるもの
  */

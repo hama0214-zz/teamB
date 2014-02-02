@@ -15,6 +15,8 @@
 #include "EnemyPiece.h"
 #include "ItemPiece.h"
 
+class MapPiece;
+
 USING_NS_CC;
 
 class MapPieceFactory {

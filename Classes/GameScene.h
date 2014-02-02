@@ -7,6 +7,7 @@
 #include "GameMaster.h"
 
 class PlayerSpine;
+class CollisionManager;
 
 class GameScene: public cocos2d::CCLayer
 {
@@ -45,6 +46,9 @@ private:
     /** マップの移動アクションのタグ（移動をストップさせるのに使用） */
     static const int TAG_MAP_MOVE_EVENT;
 
+    /** 衝突判定アクションのタグ（判定をストップさせるのに使用） */
+    static const int TAG_COLLISION_CHECK_EVENT;
+
     /** マップ管理オブジェクト */
     MapPieceManager* mapPieceMgr;
 
@@ -57,6 +61,9 @@ private:
     /** 背景レイヤー */
     BackgroundLayer* bgLayer;
     
+    /** 衝突を判定するクラス */
+    CollisionManager* colMgr;
+
     /** 
      * マップ移動開始
      * Created by C15 川辺兼嗣

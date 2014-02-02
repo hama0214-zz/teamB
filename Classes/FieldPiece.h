@@ -22,7 +22,7 @@ class FieldPiece : public MapPiece {
     Variables::PIECE_TYPE getPieceType() const;
     void hitPlayer();
     bool getIsLive() const;
-    const CCRect& getRect();
+    const CCRect& getRect(const CCPoint& mapPosition);
 public:
     CCRect rect;
 

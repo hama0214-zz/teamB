@@ -73,14 +73,15 @@ Variables::PIECE_TYPE EnemyPiece::getPieceType() const {
 
 void EnemyPiece::hitPlayer() {
     // 何もしない
+    setVisible(false);
 }
 
 bool EnemyPiece::getIsLive() const {
     return isAlive;
 }
 
-const CCRect& EnemyPiece::getRect() {
-    rect.setRect(getPositionX() - MapPieceManager::CELL_WIDTH / 2.0f,
+const CCRect& EnemyPiece::getRect(const CCPoint& mapPosition) {
+    rect.setRect(getPositionX() + mapPosition.x - MapPieceManager::CELL_WIDTH / 2.0f,
                  getPositionY() - MapPieceManager::CELL_HEIGHT / 2.0f,
                  MapPieceManager::CELL_WIDTH,
                  MapPieceManager::CELL_HEIGHT);

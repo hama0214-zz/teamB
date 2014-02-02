@@ -39,10 +39,11 @@ public:
     
     /**
      * 当たり判定を取得する。
+     * @param マップの座標。マップピースはゲームシーンのマップノードにあり、プレイヤーはゲームシーンを直接親ノードにしているので、ずれの分を補正する。
      * @return 当たり判定。
      * Created by C15 川辺兼嗣
      */
-    virtual const CCRect& getRect() = 0;
+    virtual const CCRect& getRect(const CCPoint& mapPosition) = 0;
 };
 
 #endif /* defined(__teamB__MapPiece__) */
