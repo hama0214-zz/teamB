@@ -75,6 +75,10 @@ bool GameScene::init()
 }
 
 void GameScene::gameStart() {
+    //タップイベントを取得する
+    this->setTouchMode(kCCTouchesAllAtOnce);
+    this->setTouchEnabled(true);
+
     // マップ移動開始
     moveStart();
 
