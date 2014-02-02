@@ -82,6 +82,12 @@ private:
      */
     void moveStart();
 
+    /** 
+     * ゴールしたかどうかのチェック。
+     * Created by C15 川辺兼嗣
+     */
+    void cheackGoal();
+
     /** スコア類の更新 */
     void upScore();
     CCLabelTTF* scoreLabel;
