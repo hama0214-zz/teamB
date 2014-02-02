@@ -1,5 +1,6 @@
 //
 //  MapPieceFactory.h
+//  与えたタイプに応じたピースインスタンスを返すファクトリー
 //  teamB
 //
 //  Created by Yuto Yoshinari on 2014/01/19.
@@ -21,6 +22,7 @@ USING_NS_CC;
 
 class MapPieceFactory {
 public:
+    // publicメソッド
     static MapPiece* create(Variables::PIECE_TYPE type, Variables::PIECE_IMAGE image);
 };
 

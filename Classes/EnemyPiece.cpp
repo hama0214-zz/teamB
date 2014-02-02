@@ -1,5 +1,6 @@
 //
 //  EnemyPiece.cpp
+//  敵のピース（MapPieceクラスを継承して作られている）
 //  teamB
 //
 //  Created by Yuto Yoshinari on 2014/01/26.

@@ -1,5 +1,7 @@
 //
-//  ItemPiece.cpp（結局使わなかった）
+//  ItemPiece.cpp
+//  アイテムピース（MapPieceクラスを継承して作られている）
+// （今回は結局使わなかった）
 //  teamB
 //
 //  Created by Yuto Yoshinari on 2014/01/26.

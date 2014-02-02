@@ -1,5 +1,6 @@
 //
 //  Variables.h
+//  プロジェクト内で用いる定数を管理するクラス
 //  teamB
 //
 //  Created by Yuto Yoshinari on 2014/01/19.

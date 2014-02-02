@@ -1,5 +1,7 @@
 //
-//  GameManager.h（結局使わなかった）
+//  GameManager.h
+//  ゲーム全体を管理するクラス
+// （衝突判定の方法を変えたので今回は結局使わなかった）
 //  teamB
 //
 //  Created by Yuto Yoshinari on 2014/01/26.

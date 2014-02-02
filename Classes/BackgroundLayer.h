@@ -1,5 +1,6 @@
 //
 //  BackgroundLayer.h
+//  背景レイヤー
 //  teamB
 //
 //  Created by Yuto Yoshinari on 2014/02/02.

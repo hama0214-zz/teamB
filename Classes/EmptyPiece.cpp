@@ -2,7 +2,7 @@
 //  EmptyPiece.cpp
 //  teamB
 //
-//  Created by cocos2d-x on 2014/02/02.
+//  Created by 川辺兼嗣 on 2014/02/02.
 //
 //
 

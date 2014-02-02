@@ -1,5 +1,6 @@
 //
 //  MapPiece.h
+//  マップピース（全てのピースクラスの親クラス）
 //  teamB
 //
 //  Created by Yuto Yoshinari on 2014/01/19.
@@ -14,7 +15,6 @@
 
 USING_NS_CC;
 
-// 全てのピースクラスの親クラス
 class MapPiece : public CCSprite {
 public:
     /** 
