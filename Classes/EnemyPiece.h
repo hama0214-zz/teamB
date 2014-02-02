@@ -30,7 +30,7 @@ public:
     CCRect rect;
     
     static EnemyPiece* create(Variables::PIECE_IMAGE image);
-    virtual bool init();
+    void createEnemy();
     EnemyPiece();
     void die();
 };

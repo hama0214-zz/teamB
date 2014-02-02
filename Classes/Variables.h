@@ -30,6 +30,7 @@ public:
         
         // 敵画像
         ENEMY_PIECE_IMAGE_0 = 200,
+        ENEMY_PIECE_IMAGE_1 = 201,
         
         // アイテム画像
         ITEM_PIECE_IMAGE_0 = 300,

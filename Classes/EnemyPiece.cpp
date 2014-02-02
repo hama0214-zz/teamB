@@ -20,7 +20,7 @@ EnemyPiece* EnemyPiece::create(Variables::PIECE_IMAGE image) {
     if (pobSprite && pobSprite->initWithFile(pobSprite->getPszFileName(image))) {
         pobSprite->pieceImage = image;
         pobSprite->autorelease();
-        pobSprite->init();
+        pobSprite->createEnemy();
         return pobSprite;
     }
     CC_SAFE_DELETE(pobSprite);
@@ -54,20 +54,30 @@ EnemyPiece::EnemyPiece() {
     rect = CCRectMake(0, 0, MapPieceManager::CELL_WIDTH, MapPieceManager::CELL_HEIGHT);
 }
 
-bool EnemyPiece::init() {
-    // 親クラスを初期化できているかの確認
-    if (!MapPiece::init()) {
-        return false;
+void EnemyPiece::createEnemy() {
+        
+    switch (pieceImage) {
+        case Variables::ENEMY_PIECE_IMAGE_0: {
+            CCSkeletonAnimation* enemy = CCSkeletonAnimation::createWithFile("dragon.json", "dragon.atlas");
+            enemy->setPosition(ccp(40, 20));
+            enemy->setScale(-0.15, 0.15); // 左右を反転させている
+            enemy->setAnimation("flying", true);
+            enemy->timeScale = 1.5f; // 再生スピード。1で等倍。
+            addChild(enemy);
+            break;
+        }
+        case Variables::ENEMY_PIECE_IMAGE_1: {
+            CCSkeletonAnimation* enemy = CCSkeletonAnimation::createWithFile("goblins.json", "goblins.atlas");
+            enemy->setPosition(ccp(40, 20));
+            enemy->setScale(-0.15, 0.15); // 左右を反転させている
+            enemy->setAnimation("walk", true);
+            enemy->timeScale = 1.5f; // 再生スピード。1で等倍。
+            addChild(enemy);
+            break;
+        }
+        default:
+            break;
     }
-    
-    CCSkeletonAnimation* enemy = CCSkeletonAnimation::createWithFile("dragon.json", "dragon.atlas");
-    enemy->setPosition(ccp(40, 20));
-    enemy->setScale(-0.15, 0.15); // 左右を反転させている
-    enemy->setAnimation("flying", true);
-    enemy->timeScale = 1.5f; // 再生スピード。1で等倍。
-    addChild(enemy);
-    
-    return true;
 }
 
 /**
