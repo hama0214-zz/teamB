@@ -9,13 +9,11 @@
 #include "PlayerSpine.h"
 #include "MapPieceManager.h"
 
-const char* PlayerSpine::JSON_FILE_NAME = "samurai.json";
+const char* PlayerSpine::JSON_FILE_NAME = "spineboy.json";
 
-const char* PlayerSpine::ATLAS_FILE_NAME = "samurai.atlas";
+const char* PlayerSpine::ATLAS_FILE_NAME = "spineboy.atlas";
 
-const char* PlayerSpine::STAY_ANIM_NAME = "wait1";
-
-const char* PlayerSpine::RUN_ANIM_NAME = "run";
+const char* PlayerSpine::RUN_ANIM_NAME = "walk";
 
 PlayerSpine::~PlayerSpine()
 {
@@ -42,8 +40,7 @@ PlayerSpine* PlayerSpine::create()
 
 bool PlayerSpine::init()
 {
-    setScaleX(-1); // 右向き表示
-    setPosition(ccp(200, 200)); // 初期位置
+    setPosition(ccp(200, 180)); // 初期位置
 
 //    setAnchorPoint(ccp(0.9f,0.9f));
     
@@ -56,10 +53,10 @@ bool PlayerSpine::init()
 
 const CCRect& PlayerSpine::getRect()
 {
-    m_rect.setRect(getPositionX() - MapPieceManager::CELL_WIDTH / 2.0f,
-                   getPositionY() - MapPieceManager::CELL_HEIGHT / 2.0f,
-                   MapPieceManager::CELL_WIDTH,
-                   MapPieceManager::CELL_HEIGHT);
+    m_rect.setRect(getPositionX() - MapPieceManager::CELL_WIDTH / 4.0f,
+                   getPositionY() - MapPieceManager::CELL_HEIGHT / 4.0f,
+                   MapPieceManager::CELL_WIDTH / 2.0f,
+                   MapPieceManager::CELL_HEIGHT / 2.0f);
     return m_rect;
 }
 
@@ -124,7 +121,7 @@ void PlayerSpine::jump()
         timeScale = 20.0f;
 
         // ジャンプ
-        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 200), 180, 1);
+        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 180), 180, 1);
 
         // 着地時に再び走る
         CCCallFunc* runFunc = CCCallFunc::create(this, callfunc_selector(PlayerSpine::run));
@@ -142,7 +139,7 @@ void PlayerSpine::jump()
         }
         
         // ジャンプ
-        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 200), 300, 1);
+        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 180), 300, 1);
         CCRotateBy* rotate =CCRotateBy::create(0.5f,360);
         CCSpawn* spawn=CCSpawn::create(rotate,jump,NULL);
         
