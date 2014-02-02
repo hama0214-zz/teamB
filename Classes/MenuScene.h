@@ -1,3 +1,4 @@
+/* 作者: C25 白濱　学 */
 #ifndef __MENU_SCENE_H__
 #define __MENU_SCENE_H__
 
