@@ -23,6 +23,7 @@ public:
     bool jump();
     void playerMoveFinished();
     void update(float);
+    
 
     int getpStatus();
     bool getpGigantic();
