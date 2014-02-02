@@ -35,6 +35,9 @@ public:
     /** ジャンプする */
     void jump();
 
+    /**ゴール */
+    void goal();
+    
     /**
      * 当たり判定を取得する
      * @return 当たり判定。
@@ -113,9 +116,16 @@ private:
     
     /** 再生スピードを等倍に戻して、アニメーションを再生する。 */
 	void setAnimation(const char* name, bool loop, int stateIndex = 0);
-    
+            
     /** 走る */
     void run();
+
+    /** 停止 */
+    void reset();
+    
+    /** ゲームオーバー */
+    void gameover();
+    
 };
 
 #endif /* defined(__teamB__PlayerSpine__) */
