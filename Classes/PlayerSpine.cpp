@@ -9,13 +9,11 @@
 #include "PlayerSpine.h"
 #include "MapPieceManager.h"
 
-const char* PlayerSpine::JSON_FILE_NAME = "samurai.json";
+const char* PlayerSpine::JSON_FILE_NAME = "spineboy.json";
 
-const char* PlayerSpine::ATLAS_FILE_NAME = "samurai.atlas";
+const char* PlayerSpine::ATLAS_FILE_NAME = "spineboy.atlas";
 
-const char* PlayerSpine::STAY_ANIM_NAME = "wait1";
-
-const char* PlayerSpine::RUN_ANIM_NAME = "run";
+const char* PlayerSpine::RUN_ANIM_NAME = "walk";
 
 PlayerSpine::~PlayerSpine()
 {
@@ -42,7 +40,6 @@ PlayerSpine* PlayerSpine::create()
 
 bool PlayerSpine::init()
 {
-    setScaleX(-1); // 右向き表示
     setPosition(ccp(200, 170)); // 初期位置
 
 //    setAnchorPoint(ccp(0.9f,0.9f));
@@ -56,10 +53,10 @@ bool PlayerSpine::init()
 
 const CCRect& PlayerSpine::getRect()
 {
-    m_rect.setRect(getPositionX() - MapPieceManager::CELL_WIDTH / 2.0f,
-                   getPositionY() - MapPieceManager::CELL_HEIGHT / 2.0f,
-                   MapPieceManager::CELL_WIDTH,
-                   MapPieceManager::CELL_HEIGHT);
+    m_rect.setRect(getPositionX() - MapPieceManager::CELL_WIDTH / 4.0f,
+                   getPositionY() - MapPieceManager::CELL_HEIGHT / 4.0f,
+                   MapPieceManager::CELL_WIDTH / 2.0f,
+                   MapPieceManager::CELL_HEIGHT / 2.0f);
     return m_rect;
 }
 
@@ -101,7 +98,7 @@ void PlayerSpine::setState(State state)
 
 void PlayerSpine::setAnimation(const char* name, bool loop, int stateIndex)
 {
-    timeScale = 1.0f;
+    timeScale = 5.0f;
     CCSkeletonAnimation::setAnimation(name, loop);
 }
 
