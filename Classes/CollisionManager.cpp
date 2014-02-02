@@ -11,6 +11,7 @@
 #include "PlayerSpine.h"
 #include "MapPieceManager.h"
 #include "MapPiece.h"
+#include "EmptyPiece.h"
 
 CollisionManager::~CollisionManager()
 {
@@ -49,8 +50,10 @@ void CollisionManager::updateCollisionCheck()
         MapPiece* mapPiece = NULL;
         mapPiece = dynamic_cast<MapPiece*>(mapPieceObj);
         CCAssert(mapPiece != NULL, "マップピースオブジェクト配列内のデータがマップピースでない。");
-        
-        if (!mapPiece->getIsLive() || !playerRect.intersectsRect(mapPiece->getRect(mapPosition))) {
+
+        if (!mapPiece->getIsLive() ||                                   // マップピースが活動状態（判定がある状態）か
+            !playerRect.intersectsRect(mapPiece->getRect(mapPosition))) // 判定同士がぶつかっているか
+        {
             continue;
         }
         

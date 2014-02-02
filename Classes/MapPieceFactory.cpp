@@ -7,6 +7,7 @@
 //
 
 #include "MapPieceFactory.h"
+#include "EmptyPiece.h"
 
 /**
  * 引数から生成したいMapPieceを継承したクラスを判断して、インスタンスを返すクラスメソッド
@@ -20,6 +21,10 @@ MapPiece* MapPieceFactory::create(Variables::PIECE_TYPE type, Variables::PIECE_I
     MapPiece* piece;
     
     switch (type) {
+        // 空のマップピース
+        case Variables::NONE_PIECE:
+            piece = EmptyPiece::getInstese();
+            break;
             
         // フィールド
         case Variables::FIELD_PIECE:

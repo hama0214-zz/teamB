@@ -32,11 +32,12 @@ bool PieceData::init(int dataValue) {
 Variables::PIECE_TYPE PieceData::convertToPieceType(int pieceTypeValue) {
     switch (pieceTypeValue) {
         case 0:
-            // TODO: 空白のマスオブジェクトタイプを返す。現状フィールドタイプを返している。
-            return Variables::FIELD_PIECE;
+            return Variables::NONE_PIECE;
         case 1:
             return Variables::FIELD_PIECE;
         case 2:
+            return Variables::ENEMY_PIECE;
+        case 3:
             return Variables::ITEM_PIECE;
         default:
             CCAssert(false, "不正な数を指定された。");
@@ -47,7 +48,6 @@ Variables::PIECE_TYPE PieceData::convertToPieceType(int pieceTypeValue) {
 Variables::PIECE_IMAGE PieceData::convertToImageType(int imageTypeValue) {
     switch (imageTypeValue) {
         case 0:
-            // TODO: 空白の画像タイプを返す。現状フィールド画像タイプを返している。
             return Variables::FIELD_PIECE_IMAGE_0;
         case 1:
             return Variables::FIELD_PIECE_IMAGE_1;
@@ -59,6 +59,8 @@ Variables::PIECE_IMAGE PieceData::convertToImageType(int imageTypeValue) {
             return Variables::ITEM_PIECE_IMAGE_1;
         case 5:
             return Variables::ITEM_PIECE_IMAGE_2;
+        case 6:
+            return Variables::ENEMY_PIECE_IMAGE_0;
         default:
             CCAssert(false, "不正な数を指定された。");
             break;
