@@ -75,7 +75,7 @@ void CollisionManager::updateCollisionCheck()
                 break;
 
             default:
-                CCAssert(false, "不正な");
+                CCAssert(false, "不正なピースタイプを指定された。");
                 break;
         }
     }
