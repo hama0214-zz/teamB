@@ -58,5 +58,22 @@ void CollisionManager::updateCollisionCheck()
         }
         
         mapPiece->hitPlayer();
+
+        // ゲームシーンへ送るイベント
+        switch (mapPiece->getPieceType()) {
+            // 敵との衝突
+            case Variables::ENEMY_PIECE:
+                m_gameScene->moveStop();
+                break;
+
+            case Variables::FIELD_PIECE:
+            case Variables::ITEM_PIECE:
+                // 何もしない
+                break;
+
+            default:
+                CCAssert(false, "不正な");
+                break;
+        }
     }
 }
