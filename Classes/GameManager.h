@@ -27,7 +27,7 @@ class GameManager {
     PlayerSprite* player;
     
     // ピースのサイズ
-    int PIECE_SIZE = 80;
+    static int PIECE_SIZE;
     
     int indexY;  // プレイヤーのmap内でのY座標（index）
     int columnH; // column内のピース数

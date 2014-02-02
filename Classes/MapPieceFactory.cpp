@@ -42,6 +42,7 @@ MapPiece* MapPieceFactory::create(Variables::PIECE_TYPE type, Variables::PIECE_I
             break;
             
         default:
+            CCAssert(false, "不正なタイプを指定された。");
             break;
     }
     
