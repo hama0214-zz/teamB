@@ -122,8 +122,12 @@ private:
             
     /** 走る */
     void run();
+
     /** 停止 */
     void reset();
+    
+    /** ゲームオーバー */
+    void gameover();
     
 };
 

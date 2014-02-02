@@ -160,7 +160,10 @@ void PlayerSpine::jump()
 void PlayerSpine::hitObject(Variables::PIECE_TYPE piece_type)
 {
  
-    
+    if (piece_type==2){
+        gameover();
+        
+    };
     
 }
 
@@ -187,7 +190,14 @@ void PlayerSpine::goal()
     }
 }
 
+void PlayerSpine::gameover()
+{
+    
+    setAnimation(RUN_ANIM_NAME, false);
 
+    CCJumpTo* deadMove=CCJumpTo::create(1.5f,ccp(200,-170),300,1);
+    runAction(deadMove);
+}
 void PlayerSpine::reset()
 {
     stopAction(m_jumpAction);
