@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "MapPieceManager.h"
+#include "BackgroundLayer.h"
 #include "GameMaster.h"
 
 class PlayerSpine;
@@ -63,6 +64,9 @@ private:
     /** プレイヤー */
     PlayerSpine* playerSpine;
 
+    /** 背景レイヤー */
+    BackgroundLayer* bgLayer;
+    
     /** 衝突を判定するクラス */
     CollisionManager* colMgr;
 
