@@ -187,7 +187,7 @@ void GameScene::gameover() {
 
 void GameScene::cheackGoal() {
     // 最後のマスまで走りきっていなければゴールではない
-    if (mapPieceMgr->getAllMapPieces()->count() != MapPieceManager::MAP_HEIGHT) {
+    if (mapPieceMgr->getAllMapPieces()->count() > MapPieceManager::MAP_HEIGHT) {
         return;
     }
 
