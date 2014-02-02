@@ -72,7 +72,6 @@ Variables::PIECE_TYPE ItemPiece::getPieceType() const {
 
 void ItemPiece::hitPlayer() {
     use();
-    CCLOG("Hit Item.");
     setVisible(false);
 }
 

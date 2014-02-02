@@ -73,7 +73,6 @@ Variables::PIECE_TYPE EnemyPiece::getPieceType() const {
 
 void EnemyPiece::hitPlayer() {
     // 何もしない
-    CCLOG("Hit Enemy.");
     setVisible(false);
 }
 

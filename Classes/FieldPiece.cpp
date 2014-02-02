@@ -64,7 +64,6 @@ Variables::PIECE_TYPE FieldPiece::getPieceType() const {
 
 void FieldPiece::hitPlayer() {
     // 何もしない
-    CCLOG("Hit Field.");
     setVisible(false);
 }
 
