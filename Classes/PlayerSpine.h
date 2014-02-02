@@ -36,6 +36,9 @@ public:
     /** ジャンプする */
     void jump();
 
+    /**ゴール */
+    void goal();
+    
     /**
      * 当たり判定を取得する
      * @return 当たり判定。
@@ -117,7 +120,7 @@ private:
     
     /** あたり判定*/
     void hitObject(Variables::PIECE_TYPE);
-    
+        
     /** 走る */
     void run();
 };

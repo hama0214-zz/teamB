@@ -43,7 +43,7 @@ PlayerSpine* PlayerSpine::create()
 bool PlayerSpine::init()
 {
     setScaleX(-1); // 右向き表示
-    setPosition(ccp(200, 200)); // 初期位置
+    setPosition(ccp(200, 170)); // 初期位置
 
 //    setAnchorPoint(ccp(0.9f,0.9f));
     
@@ -107,7 +107,7 @@ void PlayerSpine::setAnimation(const char* name, bool loop, int stateIndex)
 
 void PlayerSpine::jump()
 {
-    CCLog("ポジション %f %f",getAnchorPoint().x,getAnchorPoint().y);
+   // CCLog("ポジション %f %f",getAnchorPoint().x,getAnchorPoint().y);
     
     if (m_state==RUN)
     {
@@ -159,8 +159,25 @@ void PlayerSpine::jump()
  */
 void PlayerSpine::hitObject(Variables::PIECE_TYPE piece_type)
 {
-    
-    
+ 
+}
+
+void PlayerSpine::goal()
+{
+    if (m_state!=CLEAR)
+    {
+        CCLog("ababa");
+        setState(CLEAR);
+
+        setAnimation(RUN_ANIM_NAME, false);
+        CCMoveTo* goalMove1=CCMoveTo::create(0.5f,ccp(80,170));
+
+        CCJumpTo* goalMove2=CCJumpTo::create(10.5f,ccp(80,170),200,10);
+        CCRepeat* goalMove3=CCRepeat::create(goalMove2,999);
+
+        CCSequence* goalMove = CCSequence::create(goalMove1,goalMove2,NULL);
+        runAction(goalMove);
+    }
 }
 
 void PlayerSpine::run()
