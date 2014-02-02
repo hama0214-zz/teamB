@@ -1,3 +1,4 @@
+/* 作者: C25 白濱　学 */
 #include "Menuscene.h"
 #include "GameScene.h"
 
@@ -143,6 +144,7 @@ void MenuScene::showStg()
     pBtn1->setAnchorPoint(ccp(0.0, 0.0));
     pBtn1->setScale(1.5);
     pBG->addChild(pBtn1);
+    /*
     pBtn2 = CCSprite::create("menu_btn2.gif");
     pBtn2->setPosition(ccp(bgSize.width * 0.65, bgSize.height * 0.4));
     pBtn2->setAnchorPoint(ccp(0.0, 0.0));
@@ -158,6 +160,7 @@ void MenuScene::showStg()
     pBtn4->setAnchorPoint(ccp(0.0, 0.0));
     pBtn4->setScale(1.5);
     pBG->addChild(pBtn4);
+     */
 }
 
 void MenuScene::pAnime(float fDelta)

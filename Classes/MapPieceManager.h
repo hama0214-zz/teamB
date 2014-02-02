@@ -20,7 +20,7 @@ class MapPiece;
 /**
  * マップパーツを管理するクラス。
  */
-class MapPieceManager : CCObject{
+class MapPieceManager : public CCObject {
 public:
     /** 1マスの横幅 */
     static const int CELL_WIDTH;

@@ -40,7 +40,7 @@ PlayerSpine* PlayerSpine::create()
 
 bool PlayerSpine::init()
 {
-    setPosition(ccp(200, 170)); // 初期位置
+    setPosition(ccp(200, 165)); // 初期位置
 
 //    setAnchorPoint(ccp(0.9f,0.9f));
     
@@ -124,7 +124,7 @@ void PlayerSpine::jump()
         timeScale = 20.0f;
 
         // ジャンプ
-        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 170), 180, 1);
+        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 165), 180, 1);
 
         // 着地時に再び走る
         CCCallFunc* runFunc = CCCallFunc::create(this, callfunc_selector(PlayerSpine::run));
@@ -142,7 +142,7 @@ void PlayerSpine::jump()
         }
         
         // ジャンプ
-        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 180), 300, 1);
+        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 165), 300, 1);
         CCRotateBy* rotate =CCRotateBy::create(0.5f,360);
         CCSpawn* spawn=CCSpawn::create(rotate,jump,NULL);
         
@@ -162,7 +162,7 @@ void PlayerSpine::hitObject(Variables::PIECE_TYPE piece_type)
  
     if (piece_type==2){
         gameover();
-        
+        setState(DOWN);
     };
     
 }
@@ -180,9 +180,9 @@ void PlayerSpine::goal()
         setState(CLEAR);
 
         setAnimation(RUN_ANIM_NAME, false);
-        CCMoveTo* goalMove1=CCMoveTo::create(0.9f,ccp(80,170));
+        CCMoveTo* goalMove1=CCMoveTo::create(0.9f,ccp(80,165));
 
-        CCJumpTo* goalMove2=CCJumpTo::create(51.5f,ccp(80,170),300,50);
+        CCJumpTo* goalMove2=CCJumpTo::create(51.5f,ccp(80,165),300,50);
    //     CCRepeatForever *repeatF = CCRepeatForever::create(goalMove2);
         
         CCSequence* goalMove = CCSequence::create(goalMove1,goalMove2,NULL);
@@ -195,7 +195,7 @@ void PlayerSpine::gameover()
         stopAction(m_jumpAction);
     
     setAnimation(RUN_ANIM_NAME, false);
-    CCJumpTo* deadMove=CCJumpTo::create(1.5f,ccp(200,-150),300,1);
+    CCJumpTo* deadMove=CCJumpTo::create(1.5f,ccp(200,-170),300,1);
     CCCallFunc* efFunc = CCCallFunc::create(this, callfunc_selector(PlayerSpine::gameoverEf));
     CCSequence * seq = CCSequence::create(deadMove,efFunc,NULL);
     runAction(seq);
