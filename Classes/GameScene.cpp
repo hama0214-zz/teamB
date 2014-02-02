@@ -108,6 +108,7 @@ void GameScene::upScore() {
     iMater++;
     //    CCLog("iMater -> %d", iMater);
     if (iMater > 50) {
+        playerSpine->goal();
         gMaster->showPop(0);
         moveStop();
         this->addChild(gMaster->pPop);

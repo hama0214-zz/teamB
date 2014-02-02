@@ -119,12 +119,12 @@ private:
     
     /** 再生スピードを等倍に戻して、アニメーションを再生する。 */
 	void setAnimation(const char* name, bool loop, int stateIndex = 0);
-    
-    /** あたり判定*/
-    void hitObject(Variables::PIECE_TYPE);
-        
+            
     /** 走る */
     void run();
+    /** 停止 */
+    void reset();
+    
 };
 
 #endif /* defined(__teamB__PlayerSpine__) */

@@ -124,7 +124,7 @@ void PlayerSpine::jump()
         timeScale = 20.0f;
 
         // ジャンプ
-        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 200), 180, 1);
+        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 170), 180, 1);
 
         // 着地時に再び走る
         CCCallFunc* runFunc = CCCallFunc::create(this, callfunc_selector(PlayerSpine::run));
@@ -142,7 +142,7 @@ void PlayerSpine::jump()
         }
         
         // ジャンプ
-        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 200), 300, 1);
+        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 170), 300, 1);
         CCRotateBy* rotate =CCRotateBy::create(0.5f,360);
         CCSpawn* spawn=CCSpawn::create(rotate,jump,NULL);
         
@@ -160,25 +160,39 @@ void PlayerSpine::jump()
 void PlayerSpine::hitObject(Variables::PIECE_TYPE piece_type)
 {
  
+    
+    
 }
 
 void PlayerSpine::goal()
 {
+    CCLog("%f",getPosition().y);
     if (m_state!=CLEAR)
     {
-        CCLog("ababa");
+        if (m_jumpAction != NULL) {
+            stopAction(m_jumpAction);
+            m_jumpAction = NULL;
+        }
+
         setState(CLEAR);
 
         setAnimation(RUN_ANIM_NAME, false);
         CCMoveTo* goalMove1=CCMoveTo::create(0.5f,ccp(80,170));
 
-        CCJumpTo* goalMove2=CCJumpTo::create(10.5f,ccp(80,170),200,10);
-        CCRepeat* goalMove3=CCRepeat::create(goalMove2,999);
-
+        CCJumpTo* goalMove2=CCJumpTo::create(51.5f,ccp(80,170),200,50);
+   //     CCRepeatForever *repeatF = CCRepeatForever::create(goalMove2);
+        
         CCSequence* goalMove = CCSequence::create(goalMove1,goalMove2,NULL);
         runAction(goalMove);
     }
 }
+
+
+void PlayerSpine::reset()
+{
+    stopAction(m_jumpAction);
+}
+
 
 void PlayerSpine::run()
 {
