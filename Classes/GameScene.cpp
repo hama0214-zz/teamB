@@ -67,18 +67,21 @@ bool GameScene::init()
     playerSpine = PlayerSpine::create();
     CCAssert(playerSpine != NULL, "プレイヤーの生成に失敗した。");
     addChild(playerSpine);
-    
-    //タップイベントを取得する
-    this->setTouchMode(kCCTouchesAllAtOnce);
-    this->setTouchEnabled(true);
 
+    // TODO: カウントダウンのイベントの後にこのメソッドで開始したい。
+    gameStart();
+
+    return true;
+}
+
+void GameScene::gameStart() {
     // マップ移動開始
     moveStart();
-    
+
     //スコア類 (あとでrelease!!!!!!!!)
     gMaster= new GameMaster();
     gMaster->show();
-    
+
     scoreLabel= CCLabelTTF::create("Touch Layer", "arial", 48);
     scoreLabel->setString(gMaster->scoreStr->getCString());
 
@@ -89,21 +92,19 @@ bool GameScene::init()
     materLabel= CCLabelTTF::create("Touch Layer", "arial", 48);
     materLabel->setString(gMaster->scoreStr->getCString());
     materLabel->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width * 0.5, CCDirector::sharedDirector()->getWinSize().height * 0.95));
-    
+
     this->addChild(materLabel);
 
     materDLabel = CCLabelTTF::create("Touch Layer", "arial", 48);
     materDLabel->setString(gMaster->materDStr->getCString());
     materDLabel->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width * 0.5, CCDirector::sharedDirector()->getWinSize().height * 0.05));
-    
+
     this->addChild(materDLabel);
     iMater = 0;
     //スケジュール
     this->schedule(schedule_selector(GameScene::upScore), 0.3f);
-
-    return true;
-    
 }
+
 void GameScene::upScore() {
     iMater++;
     CCString *str = CCString::createWithFormat("%d M", iMater);
@@ -185,7 +186,9 @@ void GameScene::cheackGoal() {
     if (mapPieceMgr->getAllMapPieces()->count() != MapPieceManager::MAP_HEIGHT) {
         return;
     }
-    
+
+    playerSpine->goal();
+
     gMaster->showPop(0);
     moveStop();
     this->addChild(gMaster->pPop);

@@ -76,6 +76,12 @@ private:
     /** 衝突を判定するクラス */
     CollisionManager* colMgr;
 
+    /**
+     * ゲームスタート時の処理
+     * Created by C15 川辺兼嗣
+     */
+    void gameStart();
+
     /** 
      * マップ移動開始
      * Created by C15 川辺兼嗣
