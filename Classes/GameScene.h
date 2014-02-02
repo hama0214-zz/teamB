@@ -45,6 +45,12 @@ public:
      */
     void moveStop();
 
+    /**
+     * ゲームオーバー時の処理
+     * Created by C15 川辺兼嗣
+     */
+    void gameover();
+
 private:
     /** 1マス分の距離を何秒で移動するかの定数。 */
     static const float MAP_MOVE_SPEED;

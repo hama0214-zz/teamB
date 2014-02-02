@@ -108,6 +108,7 @@ void GameScene::upScore() {
     iMater++;
     //    CCLog("iMater -> %d", iMater);
     if (iMater > 50) {
+        playerSpine->goal();
         gMaster->showPop(0);
         moveStop();
         this->addChild(gMaster->pPop);
@@ -181,4 +182,10 @@ void GameScene::moveStop() {
 
 const CCPoint& GameScene::getMapPosition() {
     return mapNode->getPosition();
+}
+
+void GameScene::gameover() {
+    this->unschedule(schedule_selector(GameScene::upScore));
+    gMaster->showPop(1);
+    this->addChild(gMaster->pPop);
 }
