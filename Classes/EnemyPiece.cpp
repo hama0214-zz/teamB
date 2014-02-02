@@ -7,6 +7,7 @@
 //
 
 #include "EnemyPiece.h"
+#include "MapPieceManager.h"
 
 /**
  * FieldPieceを生成するクラスメソッド
@@ -49,6 +50,7 @@ const char* EnemyPiece::getPszFileName(Variables::PIECE_IMAGE image) {
 EnemyPiece::EnemyPiece() {
     isAlive = true;
     pieceType = Variables::ENEMY_PIECE;
+    rect = CCRectMake(0, 0, MapPieceManager::CELL_WIDTH, MapPieceManager::CELL_HEIGHT);
 }
 
 /**
@@ -65,7 +67,23 @@ void EnemyPiece::die() {
     runAction(sequence);
 }
 
+Variables::PIECE_TYPE EnemyPiece::getPieceType() const {
+    return pieceType;
+}
 
+void EnemyPiece::hitPlayer() {
+    // 何もしない
+}
 
+bool EnemyPiece::getIsLive() const {
+    return isAlive;
+}
 
+const CCRect& EnemyPiece::getRect() {
+    rect.setRect(getPositionX() - MapPieceManager::CELL_WIDTH / 2.0f,
+                 getPositionY() - MapPieceManager::CELL_HEIGHT / 2.0f,
+                 MapPieceManager::CELL_WIDTH,
+                 MapPieceManager::CELL_HEIGHT);
+    return rect;
+}
 

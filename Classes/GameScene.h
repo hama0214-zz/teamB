@@ -16,6 +16,23 @@ public:
     void ccTouchesBegan(cocos2d::CCSet*,
                         cocos2d::CCEvent*);
 
+    /**
+     * プレイヤーを取得する。
+     * @return プレイヤー
+     */
+    inline PlayerSpine* getPlayerSpine() const {return playerSpine;}
+    
+    /**
+     * マップマネージャーを取得する。
+     * @return マップマネージャー
+     */
+    inline MapPieceManager* getMapMgr() const {return mapPieceMgr;}
+
+    /**
+     * マップレイヤーの位置を取得する。
+     * @return マップレイヤーの位置
+     */
+    const CCPoint& getMapPosition();
 
 private:
     /** 1マス分の距離を何秒で移動するかの定数。 */

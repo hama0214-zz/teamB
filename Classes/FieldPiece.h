@@ -19,7 +19,13 @@ class FieldPiece : public MapPiece {
     Variables::PIECE_IMAGE pieceImage;
 
     const char* getPszFileName(Variables::PIECE_IMAGE image);
+    Variables::PIECE_TYPE getPieceType() const;
+    void hitPlayer();
+    bool getIsLive() const;
+    const CCRect& getRect();
 public:
+    CCRect rect;
+
     static FieldPiece* create(Variables::PIECE_IMAGE image);
     FieldPiece();
 };

@@ -20,7 +20,13 @@ class EnemyPiece : public MapPiece {
     bool isAlive;
     
     const char* getPszFileName(Variables::PIECE_IMAGE image);
+    Variables::PIECE_TYPE getPieceType() const;
+    void hitPlayer();
+    bool getIsLive() const;
+    const CCRect& getRect();
 public:
+    CCRect rect;
+    
     static EnemyPiece* create(Variables::PIECE_IMAGE image);
     EnemyPiece();
     void die();

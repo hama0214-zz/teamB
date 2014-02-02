@@ -110,7 +110,7 @@ CCArray* MapPieceManager::getAllMapPieces() {
         CCARRAY_FOREACH(mapLine, mapPieceObj) {
             MapPiece* mapPiece = NULL;
             mapPiece = dynamic_cast<MapPiece*>(mapPieceObj);
-            CCAssert(mapLine != NULL, "マップピースオブジェクト配列内のデータがマップピースでない。");
+            CCAssert(mapPiece != NULL, "マップピースオブジェクト配列内のデータがマップピースでない。");
 
             mapPieces->addObject(mapPiece);
         }

@@ -153,3 +153,7 @@ void GameScene::moveStart() {
 void GameScene::moveStop() {
     mapNode->stopActionByTag(GameScene::TAG_MAP_MOVE_EVENT);
 }
+
+const CCPoint& GameScene::getMapPosition() {
+    return mapNode->getPosition();
+}

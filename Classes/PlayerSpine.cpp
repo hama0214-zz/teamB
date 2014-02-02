@@ -7,6 +7,7 @@
 //
 
 #include "PlayerSpine.h"
+#include "MapPieceManager.h"
 
 const char* PlayerSpine::JSON_FILE_NAME = "samurai.json";
 
@@ -43,11 +44,21 @@ bool PlayerSpine::init()
 {
     setScaleX(-1); // 右向き表示
     setPosition(ccp(200, 200)); // 初期位置
-    
+
+    m_rect = CCRectMake(0, 0, MapPieceManager::CELL_WIDTH, MapPieceManager::CELL_HEIGHT);
     m_jumpAction = NULL;
     
     run();
     return true;
+}
+
+const CCRect& PlayerSpine::getRect()
+{
+    m_rect.setRect(getPositionX() - MapPieceManager::CELL_WIDTH / 2.0f,
+                   getPositionY() - MapPieceManager::CELL_HEIGHT / 2.0f,
+                   MapPieceManager::CELL_WIDTH,
+                   MapPieceManager::CELL_HEIGHT);
+    return m_rect;
 }
 
 void PlayerSpine::setState(State state)

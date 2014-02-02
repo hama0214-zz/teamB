@@ -7,6 +7,7 @@
 //
 
 #include "FieldPiece.h"
+#include "MapPieceManager.h"
 
 /**
  * FieldPieceを生成するクラスメソッド
@@ -54,4 +55,25 @@ const char* FieldPiece::getPszFileName(Variables::PIECE_IMAGE image) {
  */
 FieldPiece::FieldPiece() {
     pieceType = Variables::FIELD_PIECE;
+    rect = CCRectMake(0, 0, MapPieceManager::CELL_WIDTH, MapPieceManager::CELL_HEIGHT);
+}
+
+Variables::PIECE_TYPE FieldPiece::getPieceType() const {
+    return pieceType;
+}
+
+void FieldPiece::hitPlayer() {
+    // 何もしない
+}
+
+bool FieldPiece::getIsLive() const {
+    return true;
+}
+
+const CCRect& FieldPiece::getRect() {
+    rect.setRect(getPositionX() - MapPieceManager::CELL_WIDTH / 2.0f,
+                 getPositionY() - MapPieceManager::CELL_HEIGHT / 2.0f,
+                 MapPieceManager::CELL_WIDTH,
+                 MapPieceManager::CELL_HEIGHT);
+    return rect;
 }

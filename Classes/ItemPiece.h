@@ -20,7 +20,13 @@ class ItemPiece : public MapPiece {
     bool isUsed;
 
     const char* getPszFileName(Variables::PIECE_IMAGE image);
+    Variables::PIECE_TYPE getPieceType() const;
+    void hitPlayer();
+    bool getIsLive() const;
+    const CCRect& getRect();
 public:
+    CCRect rect;
+
     static ItemPiece* create(Variables::PIECE_IMAGE image);
     ItemPiece();
     void use();
