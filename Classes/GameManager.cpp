@@ -8,6 +8,8 @@
 
 #include "GameManager.h"
 
+int GameManager::PIECE_SIZE = 80;
+
 /**
  * コンストラクタ関数
  */

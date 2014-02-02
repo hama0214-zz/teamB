@@ -11,11 +11,9 @@
 EmptyPiece* EmptyPiece::instance = NULL;
 
 EmptyPiece* EmptyPiece::getInstese() {
-    if (instance != NULL) {
-        return instance;
+    if (instance == NULL) {
+        instance = create(Variables::FIELD_PIECE_IMAGE_0);
     }
-
-    instance = create(Variables::FIELD_PIECE_IMAGE_0);
     return  instance;
 }
 
@@ -31,7 +29,7 @@ EmptyPiece* EmptyPiece::create(Variables::PIECE_IMAGE image) {
 }
 
 const char* EmptyPiece::getPszFileName(Variables::PIECE_IMAGE image) {
-    return "";
+    return "Icon-72.png";
 }
 
 EmptyPiece::EmptyPiece() {

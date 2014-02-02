@@ -67,6 +67,9 @@ void CollisionManager::updateCollisionCheck()
             // 敵との衝突
             case Variables::ENEMY_PIECE:
                 m_gameScene->moveStop();
+
+                // TODO:このメソッドはできればプレイヤーのやられ演出が終わってから呼びたい。
+                m_gameScene->gameover();
                 break;
 
             case Variables::FIELD_PIECE:
@@ -75,7 +78,7 @@ void CollisionManager::updateCollisionCheck()
                 break;
 
             default:
-                CCAssert(false, "不正な");
+                CCAssert(false, "不正なピースタイプを指定された。");
                 break;
         }
     }

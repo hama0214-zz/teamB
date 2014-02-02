@@ -100,7 +100,7 @@ bool GameScene::init()
     iMater = 0;
     //スケジュール
     this->schedule(schedule_selector(GameScene::upScore), 0.3f);
-    
+
     return true;
     
 }
@@ -181,4 +181,10 @@ void GameScene::moveStop() {
 
 const CCPoint& GameScene::getMapPosition() {
     return mapNode->getPosition();
+}
+
+void GameScene::gameover() {
+    this->unschedule(schedule_selector(GameScene::upScore));
+    gMaster->showPop(1);
+    this->addChild(gMaster->pPop);
 }
