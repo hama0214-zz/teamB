@@ -126,6 +126,8 @@ private:
     /** ゲームオーバー */
     void gameover();
     
+    void gameoverEf();
+    
 };
 
 #endif /* defined(__teamB__PlayerSpine__) */

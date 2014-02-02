@@ -106,6 +106,9 @@ void PlayerSpine::jump()
 {
    // CCLog("ポジション %f %f",getAnchorPoint().x,getAnchorPoint().y);
     
+
+	
+    
     if (m_state==RUN)
     {
         setState(JUMP);
@@ -189,12 +192,23 @@ void PlayerSpine::goal()
 
 void PlayerSpine::gameover()
 {
-    
     setAnimation(RUN_ANIM_NAME, false);
-
-    CCJumpTo* deadMove=CCJumpTo::create(1.5f,ccp(200,-170),300,1);
-    runAction(deadMove);
+    CCJumpTo* deadMove=CCJumpTo::create(1.5f,ccp(200,-70),300,1);
+    CCCallFunc* efFunc = CCCallFunc::create(this, callfunc_selector(PlayerSpine::gameoverEf));
+    CCSequence * seq = CCSequence::create(deadMove,efFunc,NULL);
+    runAction(seq);
 }
+
+void PlayerSpine::gameoverEf()
+{
+    CCParticleExplosion* p = CCParticleExplosion::create(); // 爆発的なエフェクトの初期化
+	p->setDuration(0.1);     // エフェクトが停止するまでの時間
+	p->setSpeed(1000);        // エフェクトの動く速さ
+	p->setPosition(ccp(0,0)); // エフェクトの発生地点
+	// エフェクトの表示
+	this->addChild(p); // addChild するとすぐ表示
+}
+
 void PlayerSpine::reset()
 {
     stopAction(m_jumpAction);
