@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "MapPieceManager.h"
+#include "BackgroundLayer.h"
 #include "GameMaster.h"
 
 class PlayerSpine;
@@ -38,6 +39,12 @@ public:
      */
     const CCPoint& getMapPosition();
 
+    /**
+     * マップの移動停止
+     * Created by C15 川辺兼嗣
+     */
+    void moveStop();
+
 private:
     /** 1マス分の距離を何秒で移動するかの定数。 */
     static const float MAP_MOVE_SPEED;
@@ -57,6 +64,9 @@ private:
     /** プレイヤー */
     PlayerSpine* playerSpine;
 
+    /** 背景レイヤー */
+    BackgroundLayer* bgLayer;
+    
     /** 衝突を判定するクラス */
     CollisionManager* colMgr;
 
@@ -66,12 +76,6 @@ private:
      */
     void moveStart();
 
-    /**
-     * マップの移動停止 
-     * Created by C15 川辺兼嗣
-     */
-    void moveStop();
-    
     /** スコア類の更新 */
     void upScore();
     CCLabelTTF* scoreLabel;
