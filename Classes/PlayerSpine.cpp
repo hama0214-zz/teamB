@@ -45,6 +45,8 @@ bool PlayerSpine::init()
     setScaleX(-1); // 右向き表示
     setPosition(ccp(200, 200)); // 初期位置
 
+//    setAnchorPoint(ccp(0.9f,0.9f));
+    
     m_rect = CCRectMake(0, 0, MapPieceManager::CELL_WIDTH, MapPieceManager::CELL_HEIGHT);
     m_jumpAction = NULL;
     
@@ -65,15 +67,19 @@ void PlayerSpine::setState(State state)
 {
     switch (state) {
         case STAY:
+            m_state=STAY;
             break;
             
         case RUN:
+            m_state=RUN;
             break;
             
         case JUMP:
+            m_state=JUMP;
             break;
             
         case DOUBLE_JUMP:
+            m_state=DOUBLE_JUMP;
             break;
             
         case DAMAGE:
@@ -93,31 +99,68 @@ void PlayerSpine::setState(State state)
     m_state = state;
 }
 
-void PlayerSpine::setAnimation(const char* name, bool loop, int stateIndex) {
+void PlayerSpine::setAnimation(const char* name, bool loop, int stateIndex)
+{
     timeScale = 1.0f;
     CCSkeletonAnimation::setAnimation(name, loop);
 }
 
 void PlayerSpine::jump()
 {
-    setState(JUMP);
+    CCLog("ポジション %f %f",getAnchorPoint().x,getAnchorPoint().y);
     
-    if (m_jumpAction != NULL) {
-        stopAction(m_jumpAction);
-        m_jumpAction = NULL;
+    if (m_state==RUN)
+    {
+        setState(JUMP);
+        
+        if (m_jumpAction != NULL) {
+            stopAction(m_jumpAction);
+            m_jumpAction = NULL;
+        }
+    
+        // 走りアニメを止める
+        // TODO:止めるメソッドがわからないので、走りモーションを再生させなおし、最終フレームで止まるようにしてある。
+        setAnimation(RUN_ANIM_NAME, false);
+        timeScale = 20.0f;
+
+        // ジャンプ
+        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 200), 180, 1);
+
+        // 着地時に再び走る
+        CCCallFunc* runFunc = CCCallFunc::create(this, callfunc_selector(PlayerSpine::run));
+        m_jumpAction = CCSequence::create(jump, runFunc, NULL);
+        runAction(m_jumpAction);
+    
+    }
+    else if (m_state==JUMP)
+    {
+        setState(DOUBLE_JUMP);
+        
+        if (m_jumpAction != NULL) {
+            stopAction(m_jumpAction);
+            m_jumpAction = NULL;
+        }
+        
+        // ジャンプ
+        CCJumpTo* jump = CCJumpTo::create(0.5f, ccp(200, 200), 300, 1);
+        CCRotateBy* rotate =CCRotateBy::create(0.5f,360);
+        CCSpawn* spawn=CCSpawn::create(rotate,jump,NULL);
+        
+        // 着地時に再び走る
+        CCCallFunc* runFunc = CCCallFunc::create(this, callfunc_selector(PlayerSpine::run));
+        m_jumpAction = CCSequence::create(spawn, runFunc, NULL);
+        runAction(m_jumpAction);
     }
     
-    // 走りアニメを止める
-    // TODO:止めるメソッドがわからないので、走りモーションを再生させなおし、最終フレームで止まるようにしてある。
-    setAnimation(RUN_ANIM_NAME, false);
-    timeScale = 20.0f;
+}
+
+/*
+ 
+ */
+void PlayerSpine::hitObject(Variables::PIECE_TYPE piece_type)
+{
     
-    // ジャンプ
-    CCJumpBy* jump = CCJumpBy::create(0.45f, ccp(0, 0), 180, 1);
-    // 着地時に再び走る
-    CCCallFunc* runFunc = CCCallFunc::create(this, callfunc_selector(PlayerSpine::run));
-    m_jumpAction = CCSequence::create(jump, runFunc, NULL);
-    runAction(m_jumpAction);
+    
 }
 
 void PlayerSpine::run()
