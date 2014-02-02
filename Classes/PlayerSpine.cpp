@@ -195,7 +195,7 @@ void PlayerSpine::gameover()
         stopAction(m_jumpAction);
     
     setAnimation(RUN_ANIM_NAME, false);
-    CCJumpTo* deadMove=CCJumpTo::create(1.5f,ccp(200,-160),300,1);
+    CCJumpTo* deadMove=CCJumpTo::create(1.5f,ccp(200,-170),300,1);
     CCCallFunc* efFunc = CCCallFunc::create(this, callfunc_selector(PlayerSpine::gameoverEf));
     CCSequence * seq = CCSequence::create(deadMove,efFunc,NULL);
     runAction(seq);
