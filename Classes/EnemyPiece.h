@@ -11,8 +11,10 @@
 
 #include "cocos2d.h"
 #include "MapPiece.h"
+#include "spine/spine-cocos2dx.h"
 
 USING_NS_CC;
+using namespace cocos2d::extension;
 
 class EnemyPiece : public MapPiece {
     Variables::PIECE_TYPE  pieceType;
@@ -28,6 +30,7 @@ public:
     CCRect rect;
     
     static EnemyPiece* create(Variables::PIECE_IMAGE image);
+    virtual bool init();
     EnemyPiece();
     void die();
 };

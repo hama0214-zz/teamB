@@ -20,6 +20,7 @@ EnemyPiece* EnemyPiece::create(Variables::PIECE_IMAGE image) {
     if (pobSprite && pobSprite->initWithFile(pobSprite->getPszFileName(image))) {
         pobSprite->pieceImage = image;
         pobSprite->autorelease();
+        pobSprite->init();
         return pobSprite;
     }
     CC_SAFE_DELETE(pobSprite);
@@ -36,7 +37,7 @@ const char* EnemyPiece::getPszFileName(Variables::PIECE_IMAGE image) {
     const char* pszFileName;
     switch (image) {
         case Variables::ENEMY_PIECE_IMAGE_0:
-            pszFileName = "Icon-72.png";
+            pszFileName = "empty_piece.png";
             break;
         default:
             break;
@@ -51,6 +52,22 @@ EnemyPiece::EnemyPiece() {
     isAlive = true;
     pieceType = Variables::ENEMY_PIECE;
     rect = CCRectMake(0, 0, MapPieceManager::CELL_WIDTH, MapPieceManager::CELL_HEIGHT);
+}
+
+bool EnemyPiece::init() {
+    // 親クラスを初期化できているかの確認
+    if (!MapPiece::init()) {
+        return false;
+    }
+    
+    CCSkeletonAnimation* enemy = CCSkeletonAnimation::createWithFile("dragon.json", "dragon.atlas");
+    enemy->setPosition(ccp(40, 20));
+    enemy->setScale(-0.15, 0.15); // 左右を反転させている
+    enemy->setAnimation("flying", true);
+    enemy->timeScale = 1.5f; // 再生スピード。1で等倍。
+    addChild(enemy);
+    
+    return true;
 }
 
 /**
