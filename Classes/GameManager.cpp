@@ -1,5 +1,5 @@
 //
-//  GameManager.cpp
+//  GameManager.cpp（結局使わなかった）
 //  teamB
 //
 //  Created by Yuto Yoshinari on 2014/01/26.
@@ -104,7 +104,6 @@ float GameManager::getPlayerY() {
 /**
  * プレイヤーの状態を返すメソッド
  * @private
- * @return {PLAYER_STATE}
  */
 GameManager::PLAYER_STATE GameManager::getPlayerState() {
     float playerY = getPlayerY();

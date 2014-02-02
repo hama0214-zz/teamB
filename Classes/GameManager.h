@@ -1,5 +1,5 @@
 //
-//  GameManager.h
+//  GameManager.h（結局使わなかった）
 //  teamB
 //
 //  Created by Yuto Yoshinari on 2014/01/26.
